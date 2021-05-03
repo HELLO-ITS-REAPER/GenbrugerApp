@@ -7,9 +7,57 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="513" Width="1030">
     <Grid>
-        <Image Source="Pictures\GenbrugerLogo.png"/>
+        <!--Images-->
+        <Image Source="Pictures\GenbrugerLogo.png" 
+               RenderOptions.BitmapScalingMode="HighQuality"
+               Height="123" Width="290" VerticalAlignment="Top"
+               HorizontalAlignment="Left"/>
 
-        <Rectangle Fill="#8CC53E" Height="8" 
-                   VerticalAlignment="Bottom"/>
+        <!--DataGrid-->
+        <DataGrid Name="Data" AutoGenerateColumns="False" CanUserAddRows="False"
+                  IsReadOnly="True" SelectionMode="Single" Height="250" 
+                  Width="750" Margin="230,0,0,40">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Kategori" Width="*"
+                                    Binding="{Binding Kategori}"/>
+                <DataGridTextColumn Header="Mængde" Width="*"
+                                    Binding="{Binding Mængde}"/>
+                <DataGridTextColumn Header="Beskrivelse" Width="*"
+                                    Binding="{Binding Beskrivelse}"/>
+                <DataGridTextColumn Header="Måleenhed" Width="*"
+                                    Binding="{Binding Måleenhed}"/>
+                <DataGridTextColumn Header="Tid" Width="*"
+                                    Binding="{Binding Tid}"/>
+                <DataGridTextColumn Header="Affaldspost ID" Width="*"
+                                    Binding="{Binding AffaldspostID}"/>
+                <DataGridTextColumn Header="Skralde ID" Width="*"
+                                    Binding="{Binding SkraldeID}"/>
+                <DataGridTextColumn Header="Virksomheds ID" Width="*"
+                                    Binding="{Binding VirksomhedsID}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!--Buttons-->
+        <Button Name="ImportButton" Content="Import" 
+                Height="73" Width="156" FontSize="37" HorizontalAlignment="Left"
+                Margin="70,0,0,80" Click="ImportButton_Click"/>
+        <Button Name="EksportButton" Content="Eksport" 
+                Height="73" Width="156" FontSize="37" HorizontalAlignment="Left"
+                Margin="70,120,0,0" Click="EksportButton_Click"/>
+        <Button Name="AddButton" Content="Tilføj" 
+                Height="73" Width="156" FontSize="37" HorizontalAlignment="Left"
+                Margin="70,320,0,0" Click="AddButton_Click"/>
+        <Button Name="EditButton" Content="Rediger" 
+                Height="73" Width="156" FontSize="37" HorizontalAlignment="Left"
+                Margin="320,320,0,0" Click="EditButton_Click"/>
+        <Button Name="DeleteButton" Content="Slet" 
+                Height="73" Width="156" FontSize="37" HorizontalAlignment="Left"
+                Margin="550,320,0,0" Click="DeleteButton_Click"/>
+        <Button Name="StatisticsButton" Content="Statestik" 
+                Height="73" Width="156" FontSize="37" HorizontalAlignment="Left"
+                Margin="780,320,0,0" Click="StatisticsButton_Click"/>
+
+        <!--Rectangles-->
+        <Rectangle Fill="#8CC53E" Height="8" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

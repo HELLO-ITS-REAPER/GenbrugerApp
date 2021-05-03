@@ -24,5 +24,41 @@ namespace GenbrugerApp
         {
             InitializeComponent();
         }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EksportButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window AddWindow = new Window();
+            AddWindow.Show();
+            this.Close();
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window EditWindow = new Window();
+            EditWindow.Show();
+            this.Close();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window StatisticsWindow = new Window();
+            StatisticsWindow.Show();
+            this.Close();
+        }
     }
 }
