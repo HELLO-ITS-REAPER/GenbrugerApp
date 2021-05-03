@@ -8,5 +8,8 @@
         Title="MainWindow" Height="513" Width="1030">
     <Grid>
         
+        
+        <Rectangle Fill="#8CC53E" Height="8" 
+                   VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
