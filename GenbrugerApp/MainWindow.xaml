@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="513" Width="1030">
     <Grid>
-        
+        <Image Source="Pictures\GenbrugerLogo.png"/>
+
+        <Rectangle Fill="#8CC53E" Height="8" 
+                   VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
