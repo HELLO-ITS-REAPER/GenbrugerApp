@@ -22,6 +22,16 @@ namespace GenbrugerApp
         public AddWindow()
         {
             InitializeComponent();
+
+            comboBox1.Items.Add("Batterier");
+            comboBox1.Items.Add("Biler");
+            comboBox1.Items.Add("Elektronikaffald");
+            comboBox1.Items.Add("Imprægneret træ");
+            comboBox1.Items.Add("Inventar");
+            comboBox1.Items.Add("Organisk affald");
+            comboBox1.Items.Add("Pap og papir");
+            comboBox1.Items.Add("Plastemballager");
+            comboBox1.Items.Add("PVC");
         }
     }
 }
