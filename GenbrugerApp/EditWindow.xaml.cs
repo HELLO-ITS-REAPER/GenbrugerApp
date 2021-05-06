@@ -22,6 +22,30 @@ namespace GenbrugerApp
         public EditWindow()
         {
             InitializeComponent();
+
+            comboBox1.Items.Add("Batterier");
+            comboBox1.Items.Add("Biler");
+            comboBox1.Items.Add("Elektronikaffald");
+            comboBox1.Items.Add("Imprægneret træ");
+            comboBox1.Items.Add("Inventar");
+            comboBox1.Items.Add("Organisk affald");
+            comboBox1.Items.Add("Pap og papir");
+            comboBox1.Items.Add("Plastemballager");
+            comboBox1.Items.Add("PVC");
+
+            comboBox2.Items.Add("");
+            comboBox2.Items.Add("");
+            comboBox2.Items.Add("");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
