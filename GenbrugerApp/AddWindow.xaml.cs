@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,20 @@ namespace GenbrugerApp
             comboBox1.Items.Add("Pap og papir");
             comboBox1.Items.Add("Plastemballager");
             comboBox1.Items.Add("PVC");
+
+            comboBox2.Items.Add("");
+            comboBox2.Items.Add("");
+            comboBox2.Items.Add("");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
