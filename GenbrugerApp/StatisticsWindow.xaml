@@ -9,12 +9,9 @@
     <Grid>
         <Image Source="Pictures/GenbrugerLogo.png" Margin="0,0,635,328" />
         <Rectangle Fill="#8CC53E" Height="8" VerticalAlignment="Bottom"/>
-        <Button Content="Tilbage" Background="#8CC53E" Foreground="White" FontWeight="Bold" Margin="888,407,74,48">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+        <Button Content="Tilbage" HorizontalAlignment="Left" Margin="883,414,0,0" VerticalAlignment="Top" Width="75" Height="25"/>
+
+        <ComboBox  HorizontalAlignment="Left" Margin="150,407,0,0" SelectedIndex="0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBoxkategori"/>
+
     </Grid>
 </Window>
