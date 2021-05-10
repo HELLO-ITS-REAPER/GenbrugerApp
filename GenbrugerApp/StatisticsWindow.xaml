@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenbrugerApp"
         mc:Ignorable="d"
-        Title="StatisticsWindow" Height="513" Width="1030">
+        Title="StatisticsWindow" Height="513" Width="1030"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         
     </Grid>
