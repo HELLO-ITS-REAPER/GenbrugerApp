@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
+using LiveCharts.Wpf.Charts.Base;
 
 namespace GenbrugerApp
 {
@@ -19,6 +22,9 @@ namespace GenbrugerApp
     /// </summary>
     public partial class StatisticsWindow : Window
     {
+        StatisticsPage StatisticsPage = new StatisticsPage();
+        StatisticsPage1 StatisticsPage1 = new StatisticsPage1();
+
         public StatisticsWindow()
         {
             InitializeComponent();
@@ -32,6 +38,31 @@ namespace GenbrugerApp
             comboBoxkategori.Items.Add("Pap og papir");
             comboBoxkategori.Items.Add("Plastemballager");
             comboBoxkategori.Items.Add("PVC");
+            mainframe.Content = StatisticsPage;
+            mainframe1.Content = StatisticsPage1;
+            Chart.Colors = new List<Color>
+            {
+                Colors.YellowGreen,
+                Colors.LightSeaGreen,
+                Colors.Blue
+            };
         }
+
+
+
+
+
+        private void TilbageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window MainWindow = new Window();
+            MainWindow.Show();
+            this.Close();
+        }
+
+      
+  
     }
-}
+    }
+
+    
+
