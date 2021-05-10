@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,11 @@ namespace GenbrugerApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<SkraldData> skraldData = new List<SkraldData>();
         public MainWindow()
         {
             InitializeComponent();
+            SqlViewer();
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
@@ -37,15 +41,15 @@ namespace GenbrugerApp
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            Window AddWindow = new Window();
-            AddWindow.Show();
+            AddWindow addWindow = new AddWindow();
+            addWindow.Show();
             this.Close();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            Window EditWindow = new Window();
-            EditWindow.Show();
+            EditWindow editWindow = new EditWindow();
+            editWindow.Show();
             this.Close();
         }
 
@@ -56,9 +60,44 @@ namespace GenbrugerApp
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
-            Window StatisticsWindow = new Window();
-            StatisticsWindow.Show();
+            StatisticsWindow statisticsWindow = new StatisticsWindow();
+            statisticsWindow.Show();
             this.Close();
+        }
+
+        private void SqlViewer()
+        {
+            SqlConnection connection = null;
+            try
+            {
+                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
+                SqlCommand command = new SqlCommand("SELECT * FROM Skrald", connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                skraldData.Clear();
+                while (reader.Read()) skraldData.Add(new SkraldData
+                {
+                    SkraldeID = reader[0].ToString(),
+                    Kategori = reader[1].ToString(),
+                    Maengde = reader[2].ToString(),
+                    Beskrivelse = reader[3].ToString(),
+                    Maaleenhed = reader[4].ToString(),
+                    Tid = reader[5].ToString(),
+                    AffaldspostID = reader[6].ToString(),
+                    Ansvarlig = reader[7].ToString(),
+                    CVR = reader[8].ToString()
+                });
+                connection.Close();
+                Data.ItemsSource = skraldData;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
         }
     }
 }

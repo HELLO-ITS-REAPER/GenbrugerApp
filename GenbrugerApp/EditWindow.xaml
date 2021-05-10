@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenbrugerApp"
         mc:Ignorable="d"
-        Title="EditWindow" Height="240" Width="500">
+        Title="EditWindow" Height="240" Width="500"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         
     </Grid>

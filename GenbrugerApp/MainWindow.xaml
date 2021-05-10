@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenbrugerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="513" Width="1030">
+        Title="MainWindow" Height="513" Width="1030"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <!--Images-->
         <Image Source="Pictures\GenbrugerLogo.png" 
@@ -14,27 +15,9 @@
                HorizontalAlignment="Left"/>
 
         <!--DataGrid-->
-        <DataGrid Name="Data" AutoGenerateColumns="False" CanUserAddRows="False"
+        <DataGrid Name="Data" AutoGenerateColumns="True" CanUserAddRows="False"
                   IsReadOnly="True" SelectionMode="Single" Height="250" 
                   Width="750" Margin="230,0,0,40">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Kategori" Width="*"
-                                    Binding="{Binding Kategori}"/>
-                <DataGridTextColumn Header="Mængde" Width="*"
-                                    Binding="{Binding Mængde}"/>
-                <DataGridTextColumn Header="Beskrivelse" Width="*"
-                                    Binding="{Binding Beskrivelse}"/>
-                <DataGridTextColumn Header="Måleenhed" Width="*"
-                                    Binding="{Binding Måleenhed}"/>
-                <DataGridTextColumn Header="Tid" Width="*"
-                                    Binding="{Binding Tid}"/>
-                <DataGridTextColumn Header="Affaldspost ID" Width="*"
-                                    Binding="{Binding AffaldspostID}"/>
-                <DataGridTextColumn Header="Skralde ID" Width="*"
-                                    Binding="{Binding SkraldeID}"/>
-                <DataGridTextColumn Header="Virksomheds ID" Width="*"
-                                    Binding="{Binding VirksomhedsID}"/>
-            </DataGrid.Columns>
         </DataGrid>
         
         <!--Buttons-->
