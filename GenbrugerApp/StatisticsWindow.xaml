@@ -13,11 +13,11 @@
         <Rectangle Fill="#8CC53E" Height="8" VerticalAlignment="Bottom"/>
         <Button Name="TilbageButton" Content="Tilbage" HorizontalAlignment="Left" Margin="883,407,0,0" VerticalAlignment="Top" Width="75" Height="32" Click="TilbageButton_Click"/>
 
-        <ComboBox  HorizontalAlignment="Left" Margin="150,407,0,0" SelectedIndex="0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBoxkategori"/>
+        <ComboBox SelectionChanged="comboBoxkategori_SelectionChanged" HorizontalAlignment="Left" Margin="150,407,0,0" SelectedIndex="0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBoxkategori"/>
 
     
         <Frame Height="250" Width="500" HorizontalAlignment="Right" VerticalAlignment="Center"  Name="mainframe" Margin="0,60,5,0"/>
-        <Frame Height="250" Width="500" HorizontalAlignment="Left" VerticalAlignment="Center"  Name="mainframe1" Margin="0,60,5,0"/>
+        <Frame NavigationUIVisibility="Hidden" Height="250" Width="500" HorizontalAlignment="Left" VerticalAlignment="Center"  Name="mainframe1" Margin="0,60,5,0"/>
 
     </Grid>
 </Window>

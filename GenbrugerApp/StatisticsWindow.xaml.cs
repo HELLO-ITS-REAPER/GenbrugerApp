@@ -23,7 +23,7 @@ namespace GenbrugerApp
     public partial class StatisticsWindow : Window
     {
         StatisticsPage StatisticsPage = new StatisticsPage();
-        StatisticsPage1 StatisticsPage1 = new StatisticsPage1();
+        
 
         public StatisticsWindow()
         {
@@ -39,13 +39,14 @@ namespace GenbrugerApp
             comboBoxkategori.Items.Add("Plastemballager");
             comboBoxkategori.Items.Add("PVC");
             mainframe.Content = StatisticsPage;
-            mainframe1.Content = StatisticsPage1;
             Chart.Colors = new List<Color>
             {
                 Colors.YellowGreen,
                 Colors.LightSeaGreen,
                 Colors.Blue
             };
+
+
         }
 
 
@@ -59,8 +60,16 @@ namespace GenbrugerApp
             this.Close();
         }
 
-      
-  
+        private void comboBoxkategori_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string kategoribox = comboBoxkategori.SelectedItem.ToString();
+            
+            StatisticsPage1 StatisticsPage1 = new StatisticsPage1();
+            StatisticsPage1.KategoriValgt = kategoribox;
+
+            mainframe1.Content = StatisticsPage1;
+            
+        }
     }
     }
 
