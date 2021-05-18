@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenbrugerApp"
         mc:Ignorable="d"
-        Title="AddWindow" Height="260" Width="500">
+        Title="AddWindow" Height="265" Width="500"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,77,0,0" TextWrapping="Wrap" Text="Virksomheds ID" VerticalAlignment="Top" Width="168"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,106,0,0" TextWrapping="Wrap" Text="Affaldspost ID" VerticalAlignment="Top" Width="168"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,135,0,0" TextWrapping="Wrap" Text="Ansvarlig" VerticalAlignment="Top" Width="168"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,164,0,0" TextWrapping="Wrap" Text="Beskrivelse" VerticalAlignment="Top" Width="168"/>
-        <ComboBox HorizontalAlignment="Left" Margin="271,77,0,0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBox1"/>
-        <ComboBox HorizontalAlignment="Left" Margin="271,106,0,0" VerticalAlignment="Top" Height="24" Width="168"/>
+        <ComboBox HorizontalAlignment="Left" Margin="271,77,0,0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBox1" IsEditable="True" IsReadOnly="True" Text="Vælg en kategori"/>
+        <ComboBox HorizontalAlignment="Left" Margin="271,106,0,0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBox2" IsEditable="True" IsReadOnly="True" Text="Måleenhed"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="271,135,0,0" TextWrapping="Wrap" Text="Mængde" VerticalAlignment="Top" Width="168"/>
-        <Button Content="LUK" HorizontalAlignment="Left" Margin="271,173,0,0" VerticalAlignment="Top" Width="75" Height="25"/>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="364,173,0,0" VerticalAlignment="Top" Width="75" Height="25"/>
-        <Image HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="136" Source="Pictures\GenbrugerLogo.png"/>
-        <Rectangle Height="8" Margin="0,221,0,0" Fill="#8CC53E"/>
+
+        <Button Content="LUK" HorizontalAlignment="Left" Margin="271,199,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="364,199,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Image HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="136" Source="C:\Users\madsr\Source\Repos\GenbrugerApp\GenbrugerApp\Pictures\GenbrugerLogo.png"/>
+        <Rectangle Height="8" Margin="0,229,0,0.5" Fill="#8CC53E"/>
     </Grid>
 </Window>
