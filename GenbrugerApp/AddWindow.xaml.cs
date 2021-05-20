@@ -27,7 +27,6 @@ namespace GenbrugerApp
         {
             InitializeComponent();
 
-            KategoriComboBox.Items.Add("Vælg kategori");
             KategoriComboBox.Items.Add("Batterier");
             KategoriComboBox.Items.Add("Biler");
             KategoriComboBox.Items.Add("Elektronikaffald");
@@ -64,38 +63,38 @@ namespace GenbrugerApp
         public string AffaldspostID { get; set; }
         
         
-        public string KategoriInt;
-        public string MåleenhedInt;
+        public int KategoriInt;
+        public int MåleenhedInt;
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             switch (KategoriComboBox.SelectedItem)
             {
                 case "Batterier":
-                    KategoriInt = "1";
+                    KategoriInt = 1;
                     break;
                 case "Biler":
-                    KategoriInt = "2";
+                    KategoriInt = 2;
                     break;
                 case "Elektronikaffald":
-                    KategoriInt = "3";
+                    KategoriInt = 3;
                     break;
                 case "Imprægneret træ":
-                    KategoriInt = "4";
+                    KategoriInt = 4;
                     break;
                 case "Inventar":
-                    KategoriInt = "5";
+                    KategoriInt = 5;
                     break;
                 case "Organisk affald":
-                    KategoriInt = "6";
+                    KategoriInt = 6;
                     break;
                 case "Pap og papir":
-                    KategoriInt = "7";
+                    KategoriInt = 7;
                     break;
                 case "Plastemballager":
-                    KategoriInt = "8";
+                    KategoriInt = 8;
                     break;
                 case "PVC":
-                    KategoriInt = "9";
+                    KategoriInt = 9;
                     break;
                 default:
                     break;
@@ -103,28 +102,28 @@ namespace GenbrugerApp
             switch (MåleenhedComboBox.SelectedItem)
             {
                 case "Colli":
-                    MåleenhedInt = "1";
+                    MåleenhedInt = 1;
                     break;
                 case "Stk.":
-                    MåleenhedInt = "2";
+                    MåleenhedInt = 2;
                     break;
                 case "Ton":
-                    MåleenhedInt = "3";
+                    MåleenhedInt = 3;
                     break;
                 case "Kilogram":
-                    MåleenhedInt = "4";
+                    MåleenhedInt = 4;
                     break;
                 case "Gram":
-                    MåleenhedInt = "5";
+                    MåleenhedInt = 5;
                     break;
                 case "M3":
-                    MåleenhedInt = "6";
+                    MåleenhedInt = 6;
                     break;
                 case "Liter":
-                    MåleenhedInt = "7";
+                    MåleenhedInt = 7;
                     break;
                 case "Hektoliter":
-                    MåleenhedInt = "8";
+                    MåleenhedInt = 8;
                     break;
                 default:
                     break;
@@ -137,9 +136,16 @@ namespace GenbrugerApp
                     "VALUES('{0}', '{1}' ,'{2}', '{3}', '{4}', '{5}', format(getdate(), 'yyyy-MM-dd hh:mm'), '{6}')",
                     MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(),
                     AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim(), AffaldspostIDTxt.Text.Trim());
-                SqlCommand command = new SqlCommand(cmd, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                if (MåleenhedInt != 0 && KategoriInt != 0)
+                {
+                    SqlCommand command = new SqlCommand(cmd, connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                }
+                else
+                {
+                    MessageBox.Show("Du SKAL vælge en kategori og en måleenhed.");
+                }
             }
             catch (Exception ex)
             {
