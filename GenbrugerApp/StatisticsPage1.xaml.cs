@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace GenbrugerApp
 {
@@ -22,11 +24,10 @@ namespace GenbrugerApp
     /// Interaction logic for StatisticsPage1.xaml
     /// </summary>
     public partial class StatisticsPage1 : Page
-    { static int hej = 0;
-        static int hej1 =0;
-        static int hej2 = 0;
-        static int hej3 = 0;
+    { 
+        static double myList;
         private string kategoriValgt;
+        static int KategoriInt;
         public string KategoriValgt
         {
             get { return kategoriValgt; }
@@ -36,10 +37,13 @@ namespace GenbrugerApp
         public StatisticsPage1()
         {
             InitializeComponent();
+
+           
+            SqlViewer();
             data();
-            
+
         }
-        
+
         private async void data()
         {
             await System.Threading.Tasks.Task.Delay(20);
@@ -49,79 +53,15 @@ namespace GenbrugerApp
                 Colors.LightSeaGreen,
                 Colors.Blue
             };
-            if (kategoriValgt == "Batterier")
-            {
-                hej = 5;
-                hej1 = 6;
-                hej2 = 7;
-                hej3 = 8;
 
-
-            }
-            else if (kategoriValgt == "Biler")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
-            else if (kategoriValgt == "Elektronikaffald")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
-            else if (kategoriValgt == "Imprægneret træ")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
-            else if (kategoriValgt == "Inventar")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
-            else if (kategoriValgt == "Organisk affald")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
-            else if (kategoriValgt == "Pap og papir")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
-            else if (kategoriValgt == "Plastemballager")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
-            else if (kategoriValgt == "PVC")
-            {
-                hej = 10;
-                hej1 = 10;
-                hej2 = 10;
-                hej3 = 10;
-            }
 
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
-
+                    
                     Title = kategoriValgt,
-                    Values = new ChartValues<double> { hej, hej1, hej2, hej3 ,4 }
+                    Values = new ChartValues<double> { myList }
                 },
 
             };
@@ -136,8 +76,79 @@ namespace GenbrugerApp
             SeriesCollection[0].Values.Add(5d);
 
             DataContext = this;
+           
         }
+        private async void SqlViewer()
+        {
+            await System.Threading.Tasks.Task.Delay(20);
+            switch (kategoriValgt)
+            {
+                case "Batterier":
+                    KategoriInt = 1;
+                    break;
+                case "Biler":
+                    KategoriInt = 2;
+                    break;
+                case "Elektronikaffald":
+                    KategoriInt = 3;
+                    break;
+                case "Imprægneret træ":
+                    KategoriInt = 4;
+                    break;
+                case "Inventar":
+                    KategoriInt = 5;
+                    break;
+                case "Organisk affald":
+                    KategoriInt = 6;
+                    break;
+                case "Pap og papir":
+                    KategoriInt = 7;
+                    break;
+                case "Plastemballager":
+                    KategoriInt = 8;
+                    break;
+                case "PVC":
+                    KategoriInt = 9;
+                    break;
+                default:
+                    break;
+            }
+            SqlConnection connection = null;
+            try
+            {
+                //var myList = new List<String>();
+                int i = 0;
+                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
+                SqlCommand command = new SqlCommand("SELECT * FROM Skrald WHERE Kategori = '" + KategoriInt + "'", connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
 
+                    //myList.Add(Convert.ToDecimal(reader[2]));
+                    if (KategoriInt !=null)
+                    {
+                        myList = (Convert.ToDouble(reader[1]));
+                        i++;
+                    }
+                  
+                    
+                    //Maaleenhed = reader[4].ToString(),
+                    //Tid = reader[5].ToString(),
+
+                };
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
+        }
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
