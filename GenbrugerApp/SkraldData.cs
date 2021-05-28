@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenbrugerApp
 {
-    class SkraldData
+    public class SkraldData
     {
         public string SkraldeID { get; set; }
         public string Maengde { get; set; }

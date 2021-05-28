@@ -48,7 +48,10 @@ namespace GenbrugerApp
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            EditWindow editWindow = new EditWindow();
+            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+            SkraldData skraldData = (SkraldData)row.Item;
+
+            EditWindow editWindow = new EditWindow(skraldData);
             editWindow.Show();
             this.Close();
         }
