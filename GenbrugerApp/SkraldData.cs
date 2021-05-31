@@ -15,7 +15,7 @@ namespace GenbrugerApp
         public string Beskrivelse { get; set; }
         public string Ansvarlig { get; set; }
         public string CVR { get; set; }
-        public string Tid { get; set; }
+        public DateTime Tid { get; set; }
         public string AffaldspostID { get; set; }
     }
 }

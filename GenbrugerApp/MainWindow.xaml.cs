@@ -74,7 +74,7 @@ namespace GenbrugerApp
             try
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                SqlCommand command = new SqlCommand("SELECT * FROM Skrald", connection);
+                SqlCommand command = new SqlCommand("SELECT * FROM Skrald ORDER BY SkraldeID ASC", connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 skraldData.Clear();
@@ -87,7 +87,7 @@ namespace GenbrugerApp
                     Beskrivelse = reader[4].ToString(),
                     Ansvarlig = reader[5].ToString(),
                     CVR = reader[6].ToString(),
-                    Tid = reader[7].ToString(),
+                    Tid = Convert.ToDateTime(reader[7]),
                     AffaldspostID = reader[8].ToString()
                 });
                 connection.Close();
