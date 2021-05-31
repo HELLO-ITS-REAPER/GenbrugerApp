@@ -27,7 +27,6 @@ namespace GenbrugerApp
         {
             InitializeComponent();
 
-            KategoriComboBox.Items.Add("Vælg kategori");
             KategoriComboBox.Items.Add("Batterier");
             KategoriComboBox.Items.Add("Biler");
             KategoriComboBox.Items.Add("Elektronikaffald");
@@ -62,69 +61,157 @@ namespace GenbrugerApp
         public string Ansvarlig { get; set; }
         public string CVR { get; set; }
         public string AffaldspostID { get; set; }
-        
-        
-        public string KategoriInt;
-        public string MåleenhedInt;
+
+
+        public int KategoriInt;
+        public int MåleenhedInt;
+        public bool KategoriCheck = false;
+        public bool MåleenhedCheck = false;
+        char currentCharacter;
+        public bool CvrRequirements = false;
+        public bool AffaldspostIdRequirements = false;
+        public bool AnsvarligRequirements = false;
+        public bool BeskrivelseRequirements = false;
+        public bool MængdeRequirements = false;
         private void OK_Click(object sender, RoutedEventArgs e)
         {
+            if (CvrTxt.Text.Length > 0)
+            {
+                for (int i = 0; i < CvrTxt.Text.Length; i++)
+                {
+                    currentCharacter = CvrTxt.Text[i];
+
+                    if (char.IsNumber(currentCharacter))
+                    {
+                        CvrRequirements = true;
+                    }
+                }
+            }
+
+            if (AffaldspostIDTxt.Text.Length > 0)
+            {
+                for (int i = 0; i < AffaldspostIDTxt.Text.Length; i++)
+                {
+                    currentCharacter = AffaldspostIDTxt.Text[i];
+
+                    if (char.IsNumber(currentCharacter))
+                    {
+                        AffaldspostIdRequirements = true;
+                    }
+                }
+            }
+
+            if (AnsvarligTxt.Text.Length > 0)
+            {
+                for (int i = 0; i < AnsvarligTxt.Text.Length; i++)
+                {
+                    currentCharacter = AnsvarligTxt.Text[i];
+                    if (char.IsLetter(currentCharacter))
+                    {
+                        AnsvarligRequirements = true;
+                    }
+                }
+            }
+
+            if (BeskrivelseTxt.Text.Length > 0)
+            {
+                for (int i = 0; i < BeskrivelseTxt.Text.Length; i++)
+                {
+                    currentCharacter = BeskrivelseTxt.Text[i];
+                    if (char.IsLetter(currentCharacter))
+                    {
+                        BeskrivelseRequirements = true;
+                    }
+                }
+            }
+
+            if (MængdeTxt.Text.Length > 0)
+            {
+                for (int i = 0; i < MængdeTxt.Text.Length; i++)
+                {
+                    currentCharacter = MængdeTxt.Text[i];
+                    if (char.IsDigit(currentCharacter))
+                    {
+                        MængdeRequirements = true;
+                    }
+                }
+            }
+
             switch (KategoriComboBox.SelectedItem)
             {
                 case "Batterier":
-                    KategoriInt = "1";
+                    KategoriInt = 1;
+                    KategoriCheck = true;
                     break;
                 case "Biler":
-                    KategoriInt = "2";
+                    KategoriInt = 2;
+                    KategoriCheck = true;
                     break;
                 case "Elektronikaffald":
-                    KategoriInt = "3";
+                    KategoriInt = 3;
+                    KategoriCheck = true;
                     break;
                 case "Imprægneret træ":
-                    KategoriInt = "4";
+                    KategoriInt = 4;
+                    KategoriCheck = true;
                     break;
                 case "Inventar":
-                    KategoriInt = "5";
+                    KategoriInt = 5;
+                    KategoriCheck = true;
                     break;
                 case "Organisk affald":
-                    KategoriInt = "6";
+                    KategoriInt = 6;
+                    KategoriCheck = true;
                     break;
                 case "Pap og papir":
-                    KategoriInt = "7";
+                    KategoriInt = 7;
+                    KategoriCheck = true;
                     break;
                 case "Plastemballager":
-                    KategoriInt = "8";
+                    KategoriInt = 8;
+                    KategoriCheck = true;
                     break;
                 case "PVC":
-                    KategoriInt = "9";
+                    KategoriInt = 9;
+                    KategoriCheck = true;
                     break;
                 default:
                     break;
             }
+
             switch (MåleenhedComboBox.SelectedItem)
             {
                 case "Colli":
-                    MåleenhedInt = "1";
+                    MåleenhedInt = 1;
+                    MåleenhedCheck = true;
                     break;
                 case "Stk.":
-                    MåleenhedInt = "2";
+                    MåleenhedInt = 2;
+                    MåleenhedCheck = true;
                     break;
                 case "Ton":
-                    MåleenhedInt = "3";
+                    MåleenhedInt = 3;
+                    MåleenhedCheck = true;
                     break;
                 case "Kilogram":
-                    MåleenhedInt = "4";
+                    MåleenhedInt = 4;
+                    MåleenhedCheck = true;
                     break;
                 case "Gram":
-                    MåleenhedInt = "5";
+                    MåleenhedInt = 5;
+                    MåleenhedCheck = true;
                     break;
                 case "M3":
-                    MåleenhedInt = "6";
+                    MåleenhedInt = 6;
+                    MåleenhedCheck = true;
                     break;
                 case "Liter":
-                    MåleenhedInt = "7";
+                    MåleenhedInt = 7;
+                    MåleenhedCheck = true;
                     break;
                 case "Hektoliter":
-                    MåleenhedInt = "8";
+                    MåleenhedInt = 8;
+                    MåleenhedCheck = true;
                     break;
                 default:
                     break;
@@ -137,9 +224,19 @@ namespace GenbrugerApp
                     "VALUES('{0}', '{1}' ,'{2}', '{3}', '{4}', '{5}', format(getdate(), 'yyyy-MM-dd hh:mm'), '{6}')",
                     MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(),
                     AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim(), AffaldspostIDTxt.Text.Trim());
-                SqlCommand command = new SqlCommand(cmd, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+
+                if (KategoriCheck && MåleenhedCheck && CvrRequirements && AffaldspostIdRequirements &&
+                    AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements)
+                {
+                    SqlCommand command = new SqlCommand(cmd, connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    MessageBox.Show("Din data er nu uploadet.");
+                }
+                else
+                {
+                    MessageBox.Show("Du SKAL vælge udfylde alle felter, vælge kategori og måleenhed.");
+                }
             }
             catch (Exception ex)
             {
