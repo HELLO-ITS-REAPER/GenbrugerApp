@@ -55,8 +55,8 @@ namespace GenbrugerApp
 
         private void TilbageButton_Click(object sender, RoutedEventArgs e)
         {
-            Window MainWindow = new Window();
-            MainWindow.Show();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             this.Close();
         }
 
