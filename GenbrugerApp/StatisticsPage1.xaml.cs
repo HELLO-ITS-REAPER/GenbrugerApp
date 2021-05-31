@@ -145,7 +145,11 @@ namespace GenbrugerApp
                         tid3 = focusedTime[3];
                         tid4 = focusedTime[4];
                         tid5 = focusedTime[5];
-
+                        tid6 = focusedTime[6];
+                        tid7 = focusedTime[7];
+                        tid8 = focusedTime[8];
+                        tid9 = focusedTime[9];
+                        tid10 = focusedTime[10];
                     }
                     else
                     {
@@ -194,13 +198,14 @@ namespace GenbrugerApp
                 SeriesCollection = new SeriesCollection
             {
                 new LineSeries
-                {
+                {                    Title = "",
+
                     Values = new ChartValues<double>(focusedValues)
                 }
             };
                 
 
-                Labels = new[] { tid0, tid1,tid2,tid3,tid4 };
+                Labels = new[] { tid0, tid1,tid2,tid3,tid4, tid5 , tid6 , tid7 , tid8 , tid9, tid10 };
                 YFormatter = value => value.ToString("C");
 
                
