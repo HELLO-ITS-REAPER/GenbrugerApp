@@ -31,6 +31,18 @@ namespace GenbrugerApp
 
         private string kategoriValgt;
         static int KategoriInt;
+        static string tid0="";
+        static string tid1="";
+        static string tid2="";
+        static string tid3="";
+        static string tid4="";
+        static string tid5="";
+        static string tid6="";
+        static string tid7="";
+        static string tid8="";
+        static string tid9="";
+        static string tid10="";
+
         public string KategoriValgt
         {
             get { return kategoriValgt; }
@@ -51,7 +63,9 @@ namespace GenbrugerApp
         {
             await System.Threading.Tasks.Task.Delay(20);
             List<double> allValues = new List<double>();
-            List<DateTime> allTime = new List<DateTime>();
+            List<string> allTime = new List<string>();
+            List<string> focusedTime = new List<string>();
+            List<double> focusedValues = new List<double>();
 
 
 
@@ -107,14 +121,58 @@ namespace GenbrugerApp
                     while (reader.Read())
                     {
                         allValues.Add(Convert.ToDouble(reader[1]));
-                        allTime.Add(Convert.ToDateTime(reader[7]));
+                        allTime.Add(Convert.ToString(reader[7]));
                     };
                     connection.Close();
 
-                    for (int i = allTime.Count - 10; i < allTime.Count; ++i)
+                    allTime.Reverse();
+                    allValues.Reverse();
+
+
+                    if (allTime.Count <= 11)
                     {
-                        allTime.FindLast
+                        for (int i = 0; i < allTime.Count ; i++)
+                        {
+                            focusedTime.Add(allTime[i]);
+                            focusedValues.Add(allValues[i]);
+                            
+                        }
+                        focusedTime.Reverse();
+                        focusedValues.Reverse();
+                        tid0 = focusedTime[0];
+                        tid1 = focusedTime[1];
+                        tid2 = focusedTime[2];
+                        tid3 = focusedTime[3];
+                        tid4 = focusedTime[4];
+                        tid5 = focusedTime[5];
+
                     }
+                    else
+                    {
+                        for (int i = 0; i < 11; i++)
+                        {
+                            focusedTime.Add(allTime[i]);
+                            focusedValues.Add(allValues[i]);
+                        }
+                        focusedTime.Reverse();
+                        focusedValues.Reverse();
+                        tid0 = focusedTime[0];
+                        tid1 = focusedTime[1];
+                        tid2 = focusedTime[2];
+                        tid3 = focusedTime[3];
+                        tid4 = focusedTime[4];
+                        tid5 = focusedTime[5];
+                        tid6 = focusedTime[6];
+                        tid7 = focusedTime[7];
+                        tid8 = focusedTime[8];
+                        tid9 = focusedTime[9];
+                        tid10 = focusedTime[10];
+
+                    }
+                       
+                    
+
+                    
 
                 }
                 catch (Exception ex)
@@ -137,14 +195,12 @@ namespace GenbrugerApp
             {
                 new LineSeries
                 {
-                    Values = new ChartValues<double>(allValues)
+                    Values = new ChartValues<double>(focusedValues)
                 }
             };
-                string tid1 = "hej";
-                string tid2 = "hej1";
-                string tid3 = "hej2";
+                
 
-                Labels = new[] {"21,4,23" , "Apr", "May" };
+                Labels = new[] { tid0, tid1,tid2,tid3,tid4 };
                 YFormatter = value => value.ToString("C");
 
                
