@@ -61,7 +61,32 @@ namespace GenbrugerApp
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+            SkraldData skraldData = (SkraldData)row.Item;
+            SqlConnection connection = null;
 
+            try
+            {
+                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
+                string cmd = string.Format("DELETE FROM Skrald WHERE SkraldeID = '{0}'", skraldData.SkraldeID);
+
+                SqlCommand command = new SqlCommand(cmd, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                MessageBox.Show("Din valgte data er nu blevet slettet.");
+                Data.ItemsSource = null;
+                SqlViewer();
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+            }
         }
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
@@ -152,6 +177,12 @@ namespace GenbrugerApp
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void RefreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Data.ItemsSource = null;
+            SqlViewer();
         }
 
     }
