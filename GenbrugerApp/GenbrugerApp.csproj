@@ -128,5 +128,34 @@
   <ItemGroup>
     <Resource Include="Pictures\GenbrugerLogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\icons8-add-property-26.png" />
+    <Resource Include="Pictures\icons8-edit-property-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\icons8-delete-document-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\icons8-statistics-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\icons8-export-csv-24.png" />
+    <Resource Include="Pictures\icons8-import-csv-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\icons8-menu-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\background-pattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\icons8-menu-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\icons8-macos-close-30.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
