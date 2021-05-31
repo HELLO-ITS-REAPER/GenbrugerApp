@@ -51,7 +51,10 @@ namespace GenbrugerApp
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            EditWindow editWindow = new EditWindow();
+            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+            SkraldData skraldData = (SkraldData)row.Item;
+
+            EditWindow editWindow = new EditWindow(skraldData);
             editWindow.Show();
             this.Close();
         }
@@ -81,14 +84,14 @@ namespace GenbrugerApp
                 while (reader.Read()) skraldData.Add(new SkraldData
                 {
                     SkraldeID = reader[0].ToString(),
-                    Kategori = reader[1].ToString(),
-                    Maengde = reader[2].ToString(),
-                    Beskrivelse = reader[3].ToString(),
-                    Maaleenhed = reader[4].ToString(),
-                    Tid = reader[5].ToString(),
-                    AffaldspostID = reader[6].ToString(),
-                    Ansvarlig = reader[7].ToString(),
-                    CVR = reader[8].ToString()
+                    Maengde = reader[1].ToString(),
+                    Maaleenhed = reader[2].ToString(),
+                    Kategori = reader[3].ToString(),
+                    Beskrivelse = reader[4].ToString(),
+                    Ansvarlig = reader[5].ToString(),
+                    CVR = reader[6].ToString(),
+                    Tid = reader[7].ToString(),
+                    AffaldspostID = reader[8].ToString()
                 });
                 connection.Close();
                 Data.ItemsSource = skraldData;
