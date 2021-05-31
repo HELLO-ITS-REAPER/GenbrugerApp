@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.IO;
+using System.Data;
 
 namespace GenbrugerApp
 {
@@ -102,5 +105,54 @@ namespace GenbrugerApp
                 if (connection != null) connection.Close();
             }
         }
+
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            // Set tooltip visibility
+
+            if (Tg_Btn.IsChecked == true)
+            {
+                tt_tilføj.Visibility = Visibility.Collapsed;
+                tt_rediger.Visibility = Visibility.Collapsed;
+                tt_slet.Visibility = Visibility.Collapsed;
+                tt_importér.Visibility = Visibility.Collapsed;
+                tt_eksportér.Visibility = Visibility.Collapsed;
+                tt_statistik.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                tt_tilføj.Visibility = Visibility.Visible;
+                tt_rediger.Visibility = Visibility.Visible;
+                tt_slet.Visibility = Visibility.Visible;
+                tt_importér.Visibility = Visibility.Visible;
+                tt_eksportér.Visibility = Visibility.Visible;
+                tt_statistik.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e)
+        {
+            img_bg.Opacity = 1;
+            Logo.Opacity = 1;
+            Data.Opacity = 1;
+        }
+
+        private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
+        {
+            img_bg.Opacity = 0.9;
+            Logo.Opacity = 0.2;
+            Data.Opacity = 0.2;
+        }
+
+        private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Tg_Btn.IsChecked = false;
+        }
+
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
