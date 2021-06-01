@@ -30,17 +30,15 @@ namespace GenbrugerApp
             skraldData = data;
 
             CvrTxt.Clear();
-            AffaldspostIDTxt.Clear();
             AnsvarligTxt.Clear();
             BeskrivelseTxt.Clear();
             TidTxt.Clear();
             MængdeTxt.Clear();
             this.CvrTxt.Text = skraldData.CVR.Trim();
-            this.AffaldspostIDTxt.Text = skraldData.AffaldspostID.Trim();
             this.AnsvarligTxt.Text = skraldData.Ansvarlig.Trim();
             this.BeskrivelseTxt.Text = skraldData.Beskrivelse.Trim();
             this.TidTxt.Text = skraldData.Tid.ToString("yyyy-MM-dd HH:mm").Trim();
-            this.MængdeTxt.Text = skraldData.Maengde.Trim();
+            this.MængdeTxt.Text = skraldData.Mængde.Trim();
 
             KategoriComboBox.Items.Add("Batterier");
             KategoriComboBox.Items.Add("Biler");
@@ -68,7 +66,6 @@ namespace GenbrugerApp
         public string Beskrivelse { get; set; }
         public string Ansvarlig { get; set; }
         public string CVR { get; set; }
-        public string AffaldspostID { get; set; }
 
 
         public int KategoriInt;
@@ -77,7 +74,6 @@ namespace GenbrugerApp
         public bool MåleenhedCheck = false;
         public char currentCharacter;
         public bool CvrRequirements = false;
-        public bool AffaldspostIdRequirements = false;
         public bool AnsvarligRequirements = false;
         public bool BeskrivelseRequirements = false;
         public bool MængdeRequirements = false;
@@ -94,19 +90,6 @@ namespace GenbrugerApp
                     if (char.IsNumber(currentCharacter))
                     {
                         CvrRequirements = true;
-                    }
-                }
-            }
-
-            if (AffaldspostIDTxt.Text.Length > 0)
-            {
-                for (int i = 0; i < AffaldspostIDTxt.Text.Length; i++)
-                {
-                    currentCharacter = AffaldspostIDTxt.Text[i];
-
-                    if (char.IsNumber(currentCharacter))
-                    {
-                        AffaldspostIdRequirements = true;
                     }
                 }
             }
@@ -244,9 +227,9 @@ namespace GenbrugerApp
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
                 string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Kategori = '{2}', Beskrivelse = '{3}', Ansvarlig = '{4}'" +
-                    ", CVR = '{5}', Tid = '{6}', AffaldspostID = '{7}' WHERE SkraldeID = '{8}'",
+                    ", CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{8}'",
                     MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(), AnsvarligTxt.Text.Trim(), 
-                    CvrTxt.Text.Trim(), TidTxt.Text.Trim(), AffaldspostIDTxt.Text.Trim(), skraldData.SkraldeID);
+                    CvrTxt.Text.Trim(), TidTxt.Text.Trim(), skraldData.SkraldeID);
 
                 if (KategoriCheck && MåleenhedCheck && CvrRequirements && 
                     AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements && TidRequirements)
