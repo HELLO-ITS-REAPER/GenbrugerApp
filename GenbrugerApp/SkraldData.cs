@@ -9,13 +9,12 @@ namespace GenbrugerApp
     public class SkraldData
     {
         public string SkraldeID { get; set; }
-        public string Maengde { get; set; }
-        public string Maaleenhed { get; set; }
+        public string Mængde { get; set; }
+        public string Måleenhed { get; set; }
         public string Kategori { get; set; }
         public string Beskrivelse { get; set; }
         public string Ansvarlig { get; set; }
         public string CVR { get; set; }
         public DateTime Tid { get; set; }
-        public string AffaldspostID { get; set; }
     }
 }
