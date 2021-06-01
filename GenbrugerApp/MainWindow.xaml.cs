@@ -17,7 +17,9 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Data;
-
+using CsvHelper;
+using CsvHelper.Configuration;
+using System.Globalization;
 namespace GenbrugerApp
 {
     /// <summary>
@@ -39,6 +41,19 @@ namespace GenbrugerApp
 
         private void EksportButton_Click(object sender, RoutedEventArgs e)
         {
+            {
+                var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
+
+                using (var writer = new StreamWriter(csvPath))
+
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteField("sep=,", false);
+                    csv.NextRecord();
+                    csv.WriteRecords(skraldData);
+                }
+            }
+
 
         }
 
