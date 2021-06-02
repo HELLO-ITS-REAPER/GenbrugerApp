@@ -30,18 +30,15 @@ namespace GenbrugerApp
             skraldData = data;
 
             CvrTxt.Clear();
-            AffaldspostIDTxt.Clear();
             AnsvarligTxt.Clear();
             BeskrivelseTxt.Clear();
             TidTxt.Clear();
             MængdeTxt.Clear();
-            this.CvrTxt.Text = skraldData.CVR;
-            this.AffaldspostIDTxt.Text = skraldData.AffaldspostID;
-            this.AnsvarligTxt.Text = skraldData.Ansvarlig;
-            this.BeskrivelseTxt.Text = skraldData.Beskrivelse;
-            this.TidTxt.Text = skraldData.Tid;
-            this.MængdeTxt.Text = skraldData.Maengde;
-
+            this.CvrTxt.Text = skraldData.CVR.Trim();
+            this.AnsvarligTxt.Text = skraldData.Ansvarlig.Trim();
+            this.BeskrivelseTxt.Text = skraldData.Beskrivelse.Trim();
+            this.TidTxt.Text = skraldData.Tid.ToString("yyyy-MM-dd HH:mm").Trim();
+            this.MængdeTxt.Text = skraldData.Mængde.Trim();
 
             comboBox1.Items.Add("Batterier");
             comboBox1.Items.Add("Biler");
@@ -69,7 +66,6 @@ namespace GenbrugerApp
         public string Beskrivelse { get; set; }
         public string Ansvarlig { get; set; }
         public string CVR { get; set; }
-        public string AffaldspostID { get; set; }
 
 
         public int KategoriInt;
@@ -78,7 +74,6 @@ namespace GenbrugerApp
         public bool MåleenhedCheck = false;
         public char currentCharacter;
         public bool CvrRequirements = false;
-        public bool AffaldspostIdRequirements = false;
         public bool AnsvarligRequirements = false;
         public bool BeskrivelseRequirements = false;
         public bool MængdeRequirements = false;
@@ -86,7 +81,7 @@ namespace GenbrugerApp
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (CvrTxt.Text.Length > 0)
+            if (CvrTxt.Text.Length == 8)
             {
                 for (int i = 0; i < CvrTxt.Text.Length; i++)
                 {
@@ -95,19 +90,6 @@ namespace GenbrugerApp
                     if (char.IsNumber(currentCharacter))
                     {
                         CvrRequirements = true;
-                    }
-                }
-            }
-
-            if (AffaldspostIDTxt.Text.Length > 0)
-            {
-                for (int i = 0; i < AffaldspostIDTxt.Text.Length; i++)
-                {
-                    currentCharacter = AffaldspostIDTxt.Text[i];
-
-                    if (char.IsNumber(currentCharacter))
-                    {
-                        AffaldspostIdRequirements = true;
                     }
                 }
             }
@@ -244,22 +226,22 @@ namespace GenbrugerApp
             try
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Beskrivelse = '{2}', Ansvarlig = '{3}'" +
-                    ", CVR = '{4}', Tid = '{5}', AffaldspostID = '{6}' WHERE SkraldeID = '{7}'",
-                    MængdeTxt.Text.Trim(), MåleenhedInt, BeskrivelseTxt.Text.Trim(), AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim(), TidTxt.Text.Trim(),
-                    AffaldspostIDTxt.Text.Trim(), skraldData.SkraldeID);
+                string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Kategori = '{2}', Beskrivelse = '{3}', Ansvarlig = '{4}'" +
+                    ", CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{8}'",
+                    MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(), AnsvarligTxt.Text.Trim(), 
+                    CvrTxt.Text.Trim(), TidTxt.Text.Trim(), skraldData.SkraldeID);
 
-                if (KategoriCheck && MåleenhedCheck && CvrRequirements && AffaldspostIdRequirements &&
+                if (KategoriCheck && MåleenhedCheck && CvrRequirements && 
                     AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements && TidRequirements)
                 {
                     SqlCommand command = new SqlCommand(cmd, connection);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-                    MessageBox.Show("Din data er nu uploadet.");
+                    MessageBox.Show("Dine ændringer er nu opdateret.");
                 }
                 else
                 {
-                    MessageBox.Show("Du SKAL vælge udfylde alle felter, vælge kategori og måleenhed.");
+                    MessageBox.Show("Du SKAL udfylde alle felter, vælge kategori og måleenhed.");
                 }
             }
             catch (Exception ex)

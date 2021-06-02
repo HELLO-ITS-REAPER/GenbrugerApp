@@ -178,6 +178,7 @@ namespace GenbrugerApp
                 default:
                     break;
             }
+
             switch (MåleenhedComboBox.SelectedItem)
             {
                 case "Colli":

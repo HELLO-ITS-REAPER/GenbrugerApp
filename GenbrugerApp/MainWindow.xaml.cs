@@ -6,7 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Data;
-
+using CsvHelper;
+using CsvHelper.Configuration;
+using System.Globalization;
 namespace GenbrugerApp
 {
     /// <summary>
@@ -23,11 +25,42 @@ namespace GenbrugerApp
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var lines = File.ReadAllLines(@"C:\Users\Martin\OneDrive - EaDania\C#\WPF\Eksamensprojekt\GenbrugerApp\GenbrugerApp\CsvFolder\TeamBravo_output.csv");
+            var list = new List<SkraldData>();
+            foreach (var line in lines)
+            {
+                var values = line.Split(';');
+                var contact = new SkraldData()
+                {
+                    SkraldeID = values[0],
+                    Mængde = values[1],
+                    Måleenhed = values[2],
+                    Kategori = values[3],
+                    Beskrivelse = values[4],
+                    Ansvarlig = values[5],
+                    CVR = values[6],
+                    Tid = Convert.ToDateTime(values[7])
+                };
+                list.Add(contact);
+            }
+            //list.ForEach(x => MessageBox.Show($"{x.SkraldeID}\t{x.Mængde}\t{x.Måleenhed}\t{x.Kategori}\t{x.Beskrivelse}\t{x.Ansvarlig}\t{x.CVR}\t{x.Tid}"));
         }
 
         private void EksportButton_Click(object sender, RoutedEventArgs e)
         {
+            {
+                var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
+
+                using (var writer = new StreamWriter(csvPath))
+
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteField("sep=,", false);
+                    csv.NextRecord();
+                    csv.WriteRecords(skraldData);
+                }
+            }
+
 
         }
 
@@ -91,21 +124,20 @@ namespace GenbrugerApp
             try
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                SqlCommand command = new SqlCommand("SELECT * FROM Skrald", connection);
+                SqlCommand command = new SqlCommand("SELECT * FROM Skrald ORDER BY SkraldeID ASC", connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 skraldData.Clear();
                 while (reader.Read()) skraldData.Add(new SkraldData
                 {
                     SkraldeID = reader[0].ToString(),
-                    Maengde = reader[1].ToString(),
-                    Maaleenhed = reader[2].ToString(),
+                    Mængde = reader[1].ToString(),
+                    Måleenhed = reader[2].ToString(),
                     Kategori = reader[3].ToString(),
                     Beskrivelse = reader[4].ToString(),
                     Ansvarlig = reader[5].ToString(),
                     CVR = reader[6].ToString(),
-                    Tid = reader[7].ToString(),
-                    AffaldspostID = reader[8].ToString()
+                    Tid = Convert.ToDateTime(reader[7])
                 });
                 connection.Close();
                 Data.ItemsSource = skraldData;
