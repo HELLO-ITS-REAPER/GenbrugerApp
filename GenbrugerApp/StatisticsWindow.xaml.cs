@@ -26,8 +26,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class StatisticsWindow : Window
     {
-        StatisticsPage StatisticsPage = new StatisticsPage();
-
+        StatisticsPage statisticsPage = new StatisticsPage();
 
         public StatisticsWindow()
         {
@@ -42,7 +41,7 @@ namespace GenbrugerApp
             comboBoxkategori.Items.Add("Pap og papir");
             comboBoxkategori.Items.Add("Plastemballager");
             comboBoxkategori.Items.Add("PVC");
-            mainframe.Content = StatisticsPage;
+            StatsPage();
             Chart.Colors = new List<Color>
             {
                 Colors.YellowGreen,
@@ -52,9 +51,23 @@ namespace GenbrugerApp
 
 
         }
+        private async void StatsPage()
+        {
+            await System.Threading.Tasks.Task.Delay(50);
+            statisticsPage.ImportList = importList;
+            mainframe.Content = statisticsPage;
 
 
+        }
 
+
+        private List<SkraldData> importList;
+        public List<SkraldData> ImportList
+        {
+            get { return importList; }
+            set { importList = value; }
+
+        }
 
 
         private void TilbageButton_Click(object sender, RoutedEventArgs e)
