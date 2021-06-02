@@ -59,24 +59,24 @@ namespace GenbrugerApp
             this.MængdeTxt.Text = skraldData.Mængde.Trim();
             this.KategoriComboBox.SelectedItem = KategoriInt;
 
-            comboBox1.Items.Add("Batterier");
-            comboBox1.Items.Add("Biler");
-            comboBox1.Items.Add("Elektronikaffald");
-            comboBox1.Items.Add("Imprægneret træ");
-            comboBox1.Items.Add("Inventar");
-            comboBox1.Items.Add("Organisk affald");
-            comboBox1.Items.Add("Pap og papir");
-            comboBox1.Items.Add("Plastemballager");
-            comboBox1.Items.Add("PVC");
+            KategoriComboBox.Items.Add("Batterier");
+            KategoriComboBox.Items.Add("Biler");
+            KategoriComboBox.Items.Add("Elektronikaffald");
+            KategoriComboBox.Items.Add("Imprægneret træ");
+            KategoriComboBox.Items.Add("Inventar");
+            KategoriComboBox.Items.Add("Organisk affald");
+            KategoriComboBox.Items.Add("Pap og papir");
+            KategoriComboBox.Items.Add("Plastemballager");
+            KategoriComboBox.Items.Add("PVC");
 
-            comboBox2.Items.Add("Colli");
-            comboBox2.Items.Add("Stk.");
-            comboBox2.Items.Add("Ton");
-            comboBox2.Items.Add("Kilogram");
-            comboBox2.Items.Add("Gram");
-            comboBox2.Items.Add("M3");
-            comboBox2.Items.Add("Liter");
-            comboBox2.Items.Add("Hektoliter");
+            MåleenhedComboBox.Items.Add("Colli");
+            MåleenhedComboBox.Items.Add("Stk.");
+            MåleenhedComboBox.Items.Add("Ton");
+            MåleenhedComboBox.Items.Add("Kilogram");
+            MåleenhedComboBox.Items.Add("Gram");
+            MåleenhedComboBox.Items.Add("M3");
+            MåleenhedComboBox.Items.Add("Liter");
+            MåleenhedComboBox.Items.Add("Hektoliter");
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
@@ -142,7 +142,7 @@ namespace GenbrugerApp
                 }
             }
 
-            switch (comboBox1.SelectedItem)
+            switch (KategoriComboBox.SelectedItem)
             {
                 case "Batterier":
                     KategoriInt = 1;
@@ -184,7 +184,7 @@ namespace GenbrugerApp
                     break;
             }
 
-            switch (comboBox2.SelectedItem)
+            switch (MåleenhedComboBox.SelectedItem)
             {
                 case "Colli":
                     MåleenhedInt = 1;
