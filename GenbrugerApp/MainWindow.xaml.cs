@@ -2,24 +2,15 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
-using System.IO;
 using System.Data;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
+using System.IO;
+
 namespace GenbrugerApp
 {
     /// <summary>
@@ -102,7 +93,32 @@ namespace GenbrugerApp
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+            SkraldData skraldData = (SkraldData)row.Item;
+            SqlConnection connection = null;
 
+            try
+            {
+                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
+                string cmd = string.Format("DELETE FROM Skrald WHERE SkraldeID = '{0}'", skraldData.SkraldeID);
+
+                SqlCommand command = new SqlCommand(cmd, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                MessageBox.Show("Din valgte data er nu blevet slettet.");
+                Data.ItemsSource = null;
+                SqlViewer();
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+            }
         }
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
@@ -147,10 +163,8 @@ namespace GenbrugerApp
             }
         }
 
-        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        private void ListViewItem_Toggle(object sender, MouseEventArgs e)
         {
-            // Set tooltip visibility
-
             if (Tg_Btn.IsChecked == true)
             {
                 tt_tilføj.Visibility = Visibility.Collapsed;
@@ -160,6 +174,7 @@ namespace GenbrugerApp
                 tt_eksportér.Visibility = Visibility.Collapsed;
                 tt_statistik.Visibility = Visibility.Collapsed;
             }
+
             else
             {
                 tt_tilføj.Visibility = Visibility.Visible;
@@ -193,6 +208,12 @@ namespace GenbrugerApp
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void RefreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Data.ItemsSource = null;
+            SqlViewer();
         }
 
     }
