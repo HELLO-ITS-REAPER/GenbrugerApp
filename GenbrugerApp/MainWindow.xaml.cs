@@ -9,6 +9,8 @@ using System.Data;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
+using System.IO;
+
 namespace GenbrugerApp
 {
     /// <summary>
