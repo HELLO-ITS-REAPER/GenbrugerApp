@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +17,7 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
+using Microsoft.VisualBasic.FileIO;
 
 namespace GenbrugerApp
 {
@@ -23,7 +27,6 @@ namespace GenbrugerApp
     public partial class StatisticsWindow : Window
     {
         StatisticsPage statisticsPage = new StatisticsPage();
-        
 
         public StatisticsWindow()
         {
@@ -77,15 +80,19 @@ namespace GenbrugerApp
         private void comboBoxkategori_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string kategoribox = comboBoxkategori.SelectedItem.ToString();
-            
+
             StatisticsPage1 StatisticsPage1 = new StatisticsPage1();
             StatisticsPage1.KategoriValgt = kategoribox;
 
             mainframe1.Content = StatisticsPage1;
+
+        }
+
+        private void UploadButton_Click(object sender, RoutedEventArgs e)
+        {
             
         }
     }
-    }
+}
 
-    
 
