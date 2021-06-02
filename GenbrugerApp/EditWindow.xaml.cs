@@ -23,6 +23,24 @@ namespace GenbrugerApp
     public partial class EditWindow : Window
     {
         public SkraldData skraldData;
+        public string Mængde { get; set; }
+        public string Måleenhed { get; set; }
+        public string Kategori { get; set; }
+        public string Beskrivelse { get; set; }
+        public string Ansvarlig { get; set; }
+        public string CVR { get; set; }
+
+
+        public int KategoriInt;
+        public int MåleenhedInt;
+        public bool KategoriCheck = false;
+        public bool MåleenhedCheck = false;
+        public char currentCharacter;
+        public bool CvrRequirements = false;
+        public bool AnsvarligRequirements = false;
+        public bool BeskrivelseRequirements = false;
+        public bool MængdeRequirements = false;
+        public bool TidRequirements = false;
         public EditWindow(SkraldData data)
         {
             InitializeComponent();
@@ -39,6 +57,7 @@ namespace GenbrugerApp
             this.BeskrivelseTxt.Text = skraldData.Beskrivelse.Trim();
             this.TidTxt.Text = skraldData.Tid.ToString("yyyy-MM-dd HH:mm").Trim();
             this.MængdeTxt.Text = skraldData.Mængde.Trim();
+            this.KategoriComboBox.SelectedItem = KategoriInt;
 
             KategoriComboBox.Items.Add("Batterier");
             KategoriComboBox.Items.Add("Biler");
@@ -59,25 +78,6 @@ namespace GenbrugerApp
             MåleenhedComboBox.Items.Add("Liter");
             MåleenhedComboBox.Items.Add("Hektoliter");
         }
-
-        public string Mængde { get; set; }
-        public string Måleenhed { get; set; }
-        public string Kategori { get; set; }
-        public string Beskrivelse { get; set; }
-        public string Ansvarlig { get; set; }
-        public string CVR { get; set; }
-
-
-        public int KategoriInt;
-        public int MåleenhedInt;
-        public bool KategoriCheck = false;
-        public bool MåleenhedCheck = false;
-        public char currentCharacter;
-        public bool CvrRequirements = false;
-        public bool AnsvarligRequirements = false;
-        public bool BeskrivelseRequirements = false;
-        public bool MængdeRequirements = false;
-        public bool TidRequirements = false;
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
