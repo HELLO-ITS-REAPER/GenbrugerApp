@@ -29,7 +29,7 @@ namespace GenbrugerApp
     public partial class StatisticsPage : Page
     {
         public StatisticsPage()
-        {
+        {///Frederik hele statisticsPage
             InitializeComponent();
             StatsPageGraf();
         }

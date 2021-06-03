@@ -31,7 +31,7 @@ namespace GenbrugerApp
 
 
         public StatisticsWindow()
-        {
+        {/// Frederik
             InitializeComponent();
             comboBoxkategori.Items.Add("vælg kategori");
             comboBoxkategori.Items.Add("Batterier");
@@ -49,7 +49,7 @@ namespace GenbrugerApp
 
         }
         private async void StatsPage()
-        {
+        {/// Frederik
             await System.Threading.Tasks.Task.Delay(100);
             List<double> batValue = new List<double>();
             List<double> bilValue = new List<double>();
@@ -140,14 +140,14 @@ namespace GenbrugerApp
 
 
         private void TilbageButton_Click(object sender, RoutedEventArgs e)
-        {
+        { ///Frederik
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
         }
 
         private void comboBoxkategori_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        { /// Frederik
             string kategoribox = comboBoxkategori.SelectedItem.ToString();
 
             StatisticsPage1 StatisticsPage1 = new StatisticsPage1();

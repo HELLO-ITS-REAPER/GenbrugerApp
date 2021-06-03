@@ -28,7 +28,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class StatisticsPage1 : Page
     {
-
+        /// Frederik har lavet hele StaticsPage1
         private string kategoriValgt;
         static int KategoriInt;
         static string tid0="";

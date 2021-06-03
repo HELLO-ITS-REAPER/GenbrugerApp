@@ -8,8 +8,8 @@ using System.Windows.Input;
 using System.Data;
 using CsvHelper;
 using CsvHelper.Configuration;
-using System.Globalization;
 using System.IO;
+using System.Globalization;
 
 namespace GenbrugerApp
 {
@@ -46,34 +46,29 @@ namespace GenbrugerApp
                     Tid = Convert.ToDateTime(values[7])
                 };
                 importList.Add(contact);
-               
+
 
             }
             StatisticsWindow statisticsWindow = new StatisticsWindow();
             statisticsWindow.Show();
             statisticsWindow.ImportList = importList;
             this.Close();
-            //list.ForEach(x => MessageBox.Show($"{x.SkraldeID}\t{x.Mængde}\t{x.Måleenhed}\t{x.Kategori}\t{x.Beskrivelse}\t{x.Ansvarlig}\t{x.CVR}\t{x.Tid}"));
         }
 
         private void EksportButton_Click(object sender, RoutedEventArgs e)
         {
+            /// Frederik
+            var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
+            File.Delete(csvPath);
+            for (int i = 0; i < skraldData.Count; i++)
             {
-                var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
-
-                using (var writer = new StreamWriter(csvPath))
-
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                using (StreamWriter sw = File.AppendText(csvPath ))
                 {
-                    csv.WriteField("sep=,", false);
-                csv.NextRecord();
-                csv.WriteRecords(skraldData);
-            }
+                    sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',' , '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + skraldData[i].Tid);
+                }
+            }           
         }
-
-
-        }
-
+        
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             AddWindow addWindow = new AddWindow();
