@@ -66,10 +66,10 @@ namespace GenbrugerApp
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
                     csv.WriteField("sep=,", false);
-                    csv.NextRecord();
-                    csv.WriteRecords(skraldData);
-                }
+                csv.NextRecord();
+                csv.WriteRecords(skraldData);
             }
+        }
 
 
         }
