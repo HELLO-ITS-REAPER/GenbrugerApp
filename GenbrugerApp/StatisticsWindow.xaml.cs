@@ -46,7 +46,7 @@ namespace GenbrugerApp
             comboBoxkategori.Items.Add("Plastemballager");
             comboBoxkategori.Items.Add("PVC");
             StatsPage();
-         
+
 
 
         }
@@ -109,22 +109,22 @@ namespace GenbrugerApp
                 }
             }
 
-                impSum.Add(batValue.Sum());
-                impSum.Add(bilValue.Sum());
-                impSum.Add(elValue.Sum());
-                impSum.Add(impValue.Sum());
-                impSum.Add(invValue.Sum());
-                impSum.Add(orgValue.Sum());
-                impSum.Add(papValue.Sum());
-                impSum.Add(plaValue.Sum());
-                impSum.Add(pvcValue.Sum());
-                if (filter == false)
-                {
-                    MessageBox.Show("En eller flere elementer i importeret data opfylder ikke kravene");
-                }
+            impSum.Add(batValue.Sum());
+            impSum.Add(bilValue.Sum());
+            impSum.Add(elValue.Sum());
+            impSum.Add(impValue.Sum());
+            impSum.Add(invValue.Sum());
+            impSum.Add(orgValue.Sum());
+            impSum.Add(papValue.Sum());
+            impSum.Add(plaValue.Sum());
+            impSum.Add(pvcValue.Sum());
+            if (filter == false)
+            {
+                MessageBox.Show("En eller flere elementer i importeret data opfylder ikke kravene");
+            }
             StatisticsPage statisticsPage = new StatisticsPage();
 
-            statisticsPage.ImpSum=impSum;
+            statisticsPage.ImpSum = impSum;
             mainframe.Content = statisticsPage;
 
 
@@ -138,7 +138,7 @@ namespace GenbrugerApp
             set { importList = value; }
 
         }
-        
+
 
 
         private void TilbageButton_Click(object sender, RoutedEventArgs e)
@@ -161,41 +161,42 @@ namespace GenbrugerApp
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (filter != false)
             {
-            SqlConnection connection = null;
-            try
-            {
-                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                connection.Open();
-                using (StreamReader reader = new StreamReader(@"C:\Users\Martin\OneDrive - EaDania\C#\WPF\Eksamensprojekt\GenbrugerApp\GenbrugerApp\CsvFolder\TeamBravo_output.csv"))
+                SqlConnection connection = null;
+                try
                 {
-                    while (!reader.EndOfStream)
+                    connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
+                    connection.Open();
+                    using (StreamReader reader = new StreamReader(@"C:\Users\Martin\OneDrive - EaDania\C#\WPF\Eksamensprojekt\GenbrugerApp\GenbrugerApp\CsvFolder\TeamBravo_output.csv"))
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(';');
-                        var sql = "INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
-                            "VALUES ('" + values[1] + "','" + values[2] + "','" + values[3] + "','" + values[4] + "','" + values[5] + "','" + values[6] +
-                            "','" + values[7] + "')";
-                        var cmd = new SqlCommand();
-                        cmd.CommandText = sql;
-                        cmd.CommandType = System.Data.CommandType.Text;
-                        cmd.Connection = connection;
-                        cmd.ExecuteNonQuery();
+                        while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+                            var values = line.Split(';');
+                            var sql = "INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
+                                "VALUES ('" + values[1] + "','" + values[2] + "','" + values[3] + "','" + values[4] + "','" + values[5] + "','" + values[6] +
+                                "','" + values[7] + "')";
+                            var cmd = new SqlCommand();
+                            cmd.CommandText = sql;
+                            cmd.CommandType = System.Data.CommandType.Text;
+                            cmd.Connection = connection;
+                            cmd.ExecuteNonQuery();
+                        }
                     }
+                    connection.Close();
                 }
-                connection.Close();
-            }
 
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
 
-            finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+                finally
+                {
+                    if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+                }
             }
         }
     }
