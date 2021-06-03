@@ -25,10 +25,12 @@ namespace GenbrugerApp
             SqlViewer();
         }
 
-        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            var lines = File.ReadAllLines(@"C:\Users\Martin\OneDrive - EaDania\C#\WPF\Eksamensprojekt\GenbrugerApp\GenbrugerApp\CsvFolder\TeamBravo_output.csv");
-            var list = new List<SkraldData>();
+            string fileName = "TeamBravo_output.csv";
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"CsvFolder\", fileName);
+            var lines = File.ReadAllLines(path);
+            var importList = new List<SkraldData>();
             foreach (var line in lines)
             {
                 var values = line.Split(';');
@@ -43,8 +45,14 @@ namespace GenbrugerApp
                     CVR = values[6],
                     Tid = Convert.ToDateTime(values[7])
                 };
-                list.Add(data);
+                importList.Add(contact);
+               
+
             }
+            StatisticsWindow statisticsWindow = new StatisticsWindow();
+            statisticsWindow.Show();
+            statisticsWindow.ImportList = importList;
+            this.Close();
             //list.ForEach(x => MessageBox.Show($"{x.SkraldeID}\t{x.Mængde}\t{x.Måleenhed}\t{x.Kategori}\t{x.Beskrivelse}\t{x.Ansvarlig}\t{x.CVR}\t{x.Tid}"));
         }
 
@@ -115,6 +123,7 @@ namespace GenbrugerApp
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
+            
             StatisticsWindow statisticsWindow = new StatisticsWindow();
             statisticsWindow.Show();
             this.Close();
