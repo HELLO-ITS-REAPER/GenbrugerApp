@@ -45,7 +45,7 @@ namespace GenbrugerApp
                     CVR = values[6],
                     Tid = Convert.ToDateTime(values[7])
                 };
-                importList.Add(contact);
+                importList.Add(data);
                
 
             }
