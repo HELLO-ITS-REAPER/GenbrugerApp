@@ -32,7 +32,7 @@ namespace GenbrugerApp
             foreach (var line in lines)
             {
                 var values = line.Split(';');
-                var contact = new SkraldData()
+                var data = new SkraldData()
                 {
                     SkraldeID = values[0],
                     Mængde = values[1],
@@ -43,7 +43,7 @@ namespace GenbrugerApp
                     CVR = values[6],
                     Tid = Convert.ToDateTime(values[7])
                 };
-                list.Add(contact);
+                list.Add(data);
             }
             //list.ForEach(x => MessageBox.Show($"{x.SkraldeID}\t{x.Mængde}\t{x.Måleenhed}\t{x.Kategori}\t{x.Beskrivelse}\t{x.Ansvarlig}\t{x.CVR}\t{x.Tid}"));
         }

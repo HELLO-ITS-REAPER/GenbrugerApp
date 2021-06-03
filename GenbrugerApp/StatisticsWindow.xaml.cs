@@ -77,14 +77,41 @@ namespace GenbrugerApp
 
         }
 
-        protected void Upload(object sender, EventArgs e)
-        {
-
-        }
-
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            SqlConnection connection = null;
+            try
+            {
+                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
+                connection.Open();
+                using (StreamReader reader = new StreamReader(@"C:\Users\Martin\OneDrive - EaDania\C#\WPF\Eksamensprojekt\GenbrugerApp\GenbrugerApp\CsvFolder\TeamBravo_output.csv"))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(';');
+                        var sql = "INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
+                            "VALUES ('" + values[1] + "','" + values[2] + "','" + values[3] + "','" + values[4] + "','" + values[5] + "','" + values[6] +
+                            "','" + values[7] + "')";
+                        var cmd = new SqlCommand();
+                        cmd.CommandText = sql;
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        cmd.Connection = connection;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                connection.Close();
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            finally
+            {
+                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+            }
         }
     }
 }
