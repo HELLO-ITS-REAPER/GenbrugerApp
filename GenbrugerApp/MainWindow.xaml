@@ -407,8 +407,8 @@
                         <!--Tilføj-->
                         <ListViewItem HorizontalAlignment="Left"
                               Margin="0,0,0,15">
-                            <Button Name="AddButton" Click="AddButton_Click" Background="Transparent" BorderThickness="0">
-                                <StackPanel Orientation="Horizontal"
+                            <Button Click="AddButton_Click" Background="Transparent" BorderThickness="0" Height="48">
+                            <StackPanel Orientation="Horizontal"
                                 Width="230">
                                     <Image Source="Pictures/icons8-add-property-26.png"
                                Stretch="None"
@@ -428,7 +428,7 @@
                         <!--Rediger-->
                         <ListViewItem HorizontalAlignment="Left"
                               Margin="0,0,0,15">
-                            <Button Click="EditButton_Click" Background="Transparent" BorderThickness="0">
+                            <Button Click="EditButton_Click" Background="Transparent" BorderThickness="0" Height="48">
                                 <StackPanel Orientation="Horizontal"
                                 Width="230">
                                     <Image Source="Pictures/icons8-edit-property-26.png"
@@ -449,7 +449,7 @@
                         <!--Slet-->
                         <ListViewItem HorizontalAlignment="Left"
                               Margin="0,0,0,15">
-                            <Button Click="DeleteButton_Click" Background="Transparent" BorderThickness="0">
+                            <Button Click="DeleteButton_Click" Background="Transparent" BorderThickness="0" Height="48">
                                 <StackPanel Orientation="Horizontal"
                                 Width="230">
                                     <Image Source="Pictures/icons8-delete-document-26.png"
@@ -470,7 +470,7 @@
                         <!--Importér-->
                         <ListViewItem HorizontalAlignment="Left"
                               Margin="0,0,0,15">
-                            <Button Click="ImportButton_Click" Background="Transparent" BorderThickness="0">
+                            <Button Click="ImportButton_Click" Background="Transparent" BorderThickness="0" Height="48">
                                 <StackPanel Orientation="Horizontal"
                                 Width="230">
                                     <Image Source="Pictures/icons8-import-csv-24.png"
@@ -491,7 +491,7 @@
                         <!--Eksportér-->
                         <ListViewItem HorizontalAlignment="Left"
                               Margin="0,0,0,15">
-                            <Button Click="EksportButton_Click" Background="Transparent" BorderThickness="0">
+                            <Button Click="EksportButton_Click" Background="Transparent" BorderThickness="0" Height="48">
                                 <StackPanel Orientation="Horizontal"
                                 Width="230">
                                     <Image Source="Pictures/icons8-export-csv-24.png"
@@ -512,7 +512,7 @@
                         <!--Statistik-->
                         <ListViewItem HorizontalAlignment="Left"
                               Margin="0,0,0,15">
-                            <Button Click="StatisticsButton_Click" Background="Transparent" BorderThickness="0">
+                            <Button Click="StatisticsButton_Click" Background="Transparent" BorderThickness="0" Height="48">
                                 <StackPanel Orientation="Horizontal"
                                 Width="230">
                                     <Image Source="Pictures/icons8-statistics-26.png"

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
+using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,7 +29,8 @@ namespace GenbrugerApp
     /// </summary>
     public partial class StatisticsWindow : Window
     {
-        StatisticsPage statisticsPage = new StatisticsPage();
+        static bool filter;
+
 
         public StatisticsWindow()
         {
@@ -44,19 +46,85 @@ namespace GenbrugerApp
             comboBoxkategori.Items.Add("Plastemballager");
             comboBoxkategori.Items.Add("PVC");
             StatsPage();
-            Chart.Colors = new List<Color>
-            {
-                Colors.YellowGreen,
-                Colors.LightSeaGreen,
-                Colors.Blue
-            };
+         
 
 
         }
         private async void StatsPage()
         {
-            await System.Threading.Tasks.Task.Delay(50);
-            statisticsPage.ImportList = importList;
+            await System.Threading.Tasks.Task.Delay(100);
+            List<double> batValue = new List<double>();
+            List<double> bilValue = new List<double>();
+            List<double> elValue = new List<double>();
+            List<double> impValue = new List<double>();
+            List<double> invValue = new List<double>();
+            List<double> orgValue = new List<double>();
+            List<double> papValue = new List<double>();
+            List<double> plaValue = new List<double>();
+            List<double> pvcValue = new List<double>();
+            List<double> impSum = new List<double>();
+
+
+            for (int i = 0; i < importList.Count; i++)
+            {
+                if (importList[i].Kategori.Contains("1") && importList[i].Måleenhed.Contains("4"))
+                {
+                    batValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("2") && importList[i].Måleenhed.Contains("2"))
+                {
+                    bilValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("3") && importList[i].Måleenhed.Contains("3"))
+                {
+                    elValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("4") && importList[i].Måleenhed.Contains("4"))
+                {
+                    impValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("5") && importList[i].Måleenhed.Contains("2"))
+                {
+                    invValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("6") && importList[i].Måleenhed.Contains("4"))
+                {
+                    orgValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("7") && importList[i].Måleenhed.Contains("5"))
+                {
+                    papValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("8") && importList[i].Måleenhed.Contains("4"))
+                {
+                    plaValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else if (importList[i].Kategori.Contains("9") && importList[i].Måleenhed.Contains("2"))
+                {
+                    pvcValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                }
+                else
+                {
+                    filter = false;
+                }
+            }
+
+                impSum.Add(batValue.Sum());
+                impSum.Add(bilValue.Sum());
+                impSum.Add(elValue.Sum());
+                impSum.Add(impValue.Sum());
+                impSum.Add(invValue.Sum());
+                impSum.Add(orgValue.Sum());
+                impSum.Add(papValue.Sum());
+                impSum.Add(plaValue.Sum());
+                impSum.Add(pvcValue.Sum());
+                if (filter == false)
+                {
+                    MessageBox.Show("En eller flere elementer i importeret data opfylder ikke kravene");
+                }
+            StatisticsPage statisticsPage = new StatisticsPage();
+
+            statisticsPage.ImpSum=impSum;
             mainframe.Content = statisticsPage;
 
 
@@ -70,6 +138,7 @@ namespace GenbrugerApp
             set { importList = value; }
 
         }
+        
 
 
         private void TilbageButton_Click(object sender, RoutedEventArgs e)
@@ -92,6 +161,9 @@ namespace GenbrugerApp
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
+            
+            if (filter != false)
+            {
             SqlConnection connection = null;
             try
             {
