@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CsvHelper;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
@@ -72,6 +74,11 @@ namespace GenbrugerApp
             StatisticsPage1.KategoriValgt = kategoribox;
 
             mainframe1.Content = StatisticsPage1;
+
+        }
+
+        protected void Upload(object sender, EventArgs e)
+        {
 
         }
 
