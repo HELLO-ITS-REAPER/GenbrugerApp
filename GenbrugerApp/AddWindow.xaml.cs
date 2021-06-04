@@ -102,7 +102,7 @@ namespace GenbrugerApp
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (CvrTxt.Text.Length > 0)
+            if (CvrTxt.Text.Length == 8)
             {
                 for (int i = 0; i < CvrTxt.Text.Length; i++)
                 {
@@ -234,8 +234,8 @@ namespace GenbrugerApp
             try
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                string cmd = string.Format("INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid, AffaldspostID) " +
-                    "VALUES('{0}', '{1}' ,'{2}', '{3}', '{4}', '{5}', format(getdate(), 'yyyy-MM-dd hh:mm'), '{6}')",
+                string cmd = string.Format("INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
+                    "VALUES('{0}', '{1}' ,'{2}', '{3}', '{4}', '{5}', format(getdate(), 'yyyy-MM-dd hh:mm'))",
                     MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(),
                     AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim());
 

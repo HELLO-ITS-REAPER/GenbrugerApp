@@ -29,74 +29,17 @@ namespace GenbrugerApp
     public partial class StatisticsPage : Page
     {
         public StatisticsPage()
-        {
+        {///Frederik hele statisticsPage
             InitializeComponent();
             StatsPageGraf();
         }
-        List<double> batValue = new List<double>();
-        List<double> bilValue = new List<double>();
-        List<double> elValue = new List<double>();
-        List<double> impValue = new List<double>();
-        List<double> invValue = new List<double>();
-        List<double> orgValue = new List<double>();
-        List<double> papValue = new List<double>();
-        List<double> plaValue = new List<double>();
-        List<double> pvcValue = new List<double>();
-
-
-        List<double> impSum = new List<double>();
+       
         private async void StatsPageGraf()
         {
-            await System.Threading.Tasks.Task.Delay(50);
-            for (int i = 0; i < importList.Count; i++)
-            {
-                if (importList[i].Kategori.Contains("1"))
-                {
-                    batValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("2"))
-                {
-                    bilValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("3"))
-                {
-                    elValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("4"))
-                {
-                    impValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("5"))
-                {
-                    invValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("6"))
-                {
-                    orgValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("7"))
-                {
-                    papValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("8"))
-                {
-                    plaValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("9"))
-                {
-                    pvcValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-            }
-            impSum.Add(batValue.Sum());
-            impSum.Add(bilValue.Sum());
-            impSum.Add(elValue.Sum());
-            impSum.Add(impValue.Sum());
-            impSum.Add(invValue.Sum());
-            impSum.Add(orgValue.Sum());
-            impSum.Add(papValue.Sum());
-            impSum.Add(plaValue.Sum());
-            impSum.Add(pvcValue.Sum());
-
+            await System.Threading.Tasks.Task.Delay(100);
+           
+            
+            
             List<double> allValues = new List<double>();
             List<double> allSum = new List<double>();
             for (int KategoriInt = 1; KategoriInt < 10; KategoriInt++)
@@ -128,6 +71,12 @@ namespace GenbrugerApp
                     if (connection != null) connection.Close();
                 }
             }
+            Chart.Colors = new List<Color>
+            {
+                Colors.YellowGreen,
+                Colors.LightSeaGreen,
+                Colors.Blue
+            };
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
@@ -157,12 +106,11 @@ namespace GenbrugerApp
         }
 
 
-        private List<SkraldData> importList;
-        public List<SkraldData> ImportList
+        private List<double> impSum;
+        public List<double> ImpSum
         {
-            get { return importList; }
-            set { importList = value; }
-
+            get { return impSum; }
+            set { impSum = value; }
         }
 
         public SeriesCollection SeriesCollection { get; set; }
