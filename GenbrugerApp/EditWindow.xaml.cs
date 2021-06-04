@@ -46,7 +46,8 @@ namespace GenbrugerApp
             InitializeComponent();
 
             skraldData = data;
-
+            int KategoriIntConverter = Convert.ToInt32(skraldData.Kategori);
+            int MåleenhedIntConverter = Convert.ToInt32(skraldData.Måleenhed);
             CvrTxt.Clear();
             AnsvarligTxt.Clear();
             BeskrivelseTxt.Clear();
@@ -57,7 +58,8 @@ namespace GenbrugerApp
             this.BeskrivelseTxt.Text = skraldData.Beskrivelse.Trim();
             this.TidTxt.Text = skraldData.Tid.ToString("yyyy-MM-dd HH:mm").Trim();
             this.MængdeTxt.Text = skraldData.Mængde.Trim();
-            this.KategoriComboBox.SelectedItem = KategoriInt;
+            this.KategoriComboBox.SelectedIndex = KategoriIntConverter - 1;
+            this.MåleenhedComboBox.SelectedIndex = MåleenhedIntConverter - 1;
 
             KategoriComboBox.Items.Add("Batterier");
             KategoriComboBox.Items.Add("Biler");
