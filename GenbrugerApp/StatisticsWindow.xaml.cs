@@ -175,6 +175,7 @@ namespace GenbrugerApp
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
+            // Martin
 
             if (filter != false)
             {

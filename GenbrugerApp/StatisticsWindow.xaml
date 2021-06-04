@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenbrugerApp"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-
         mc:Ignorable="d"
         Title="StatisticsWindow" Height="513" Width="1030"
         WindowStartupLocation="CenterScreen">
+    <!--Frederik-->
+
     <Grid>
         <Image Source="Pictures/GenbrugerLogo.png" Margin="0,0,635,328" />
         <Rectangle Fill="#8CC53E" Height="8" VerticalAlignment="Bottom"/>

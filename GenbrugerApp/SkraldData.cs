@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GenbrugerApp
 {
     public class SkraldData
-    {
+    {// Martin
         public string SkraldeID { get; set; }
         public string Mængde { get; set; }
         public string Måleenhed { get; set; }

@@ -8,6 +8,7 @@
         Title="EditWindow" Height="265" Width="500"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        <!--Mads-->
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,77,0,0" TextWrapping="Wrap" Text="CVR NR." Name="CvrTxt" VerticalAlignment="Top" Width="168"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,106,0,0" TextWrapping="Wrap" Text="Ansvarlig" Name="AnsvarligTxt" VerticalAlignment="Top" Width="168"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,135,0,0" TextWrapping="Wrap" Text="Beskrivelse" Name="BeskrivelseTxt" VerticalAlignment="Top" Width="168"/>

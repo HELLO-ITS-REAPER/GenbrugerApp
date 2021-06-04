@@ -8,7 +8,7 @@
         Title="MainWindow" Height="513" Width="1030"
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize">
-
+ <!--Mads-->
     <Window.Resources>
 
         <!--Toggle Button Style-->

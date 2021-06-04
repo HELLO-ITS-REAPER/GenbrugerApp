@@ -11,6 +11,7 @@
       Title="StatisticsPage">
 
     <Grid >
+        <!--Frederik-->
         <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="skrald kategori" Labels="{Binding Labels}"></lvc:Axis>

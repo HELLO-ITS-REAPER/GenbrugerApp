@@ -22,6 +22,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class AddWindow : Window
     {
+        /// Martin / Mads
         private List<SkraldData> list = new List<SkraldData>();
         public AddWindow()
         {
