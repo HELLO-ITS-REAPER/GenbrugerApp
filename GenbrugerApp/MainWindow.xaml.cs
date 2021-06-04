@@ -28,7 +28,7 @@ namespace GenbrugerApp
 
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            /// Frederik / Martin
             string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
            
             int Count = 0;
@@ -99,24 +99,42 @@ namespace GenbrugerApp
         
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            ///Martin
             AddWindow addWindow = new AddWindow();
             addWindow.Show();
             this.Close();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
-            SkraldData skraldData = (SkraldData)row.Item;
+        {//Martin
+            try
+            {
+                DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+                SkraldData skraldData = (SkraldData)row.Item;
 
-            EditWindow editWindow = new EditWindow(skraldData);
-            editWindow.Show();
-            this.Close();
+                EditWindow editWindow = new EditWindow(skraldData);
+                editWindow.Show();
+                this.Close();
+            }
+            catch (Exception)
+            {
+
+                 MessageBox.Show("der blev ikke valgt en data fra tabellen");
+            }            
+               
+            
+           
+           
+              
+           
+           
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+        {//Mads
+            try
+            {
+                DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
             SkraldData skraldData = (SkraldData)row.Item;
             SqlConnection connection = null;
 
@@ -142,10 +160,16 @@ namespace GenbrugerApp
             {
                 if (connection != null && connection.State == ConnectionState.Open) connection.Close();
             }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("der blev ikke valgt en data fra tabellen");
+            }
         }
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
-        {
+        {// Martin
             
             StatisticsWindow statisticsWindow = new StatisticsWindow();
             statisticsWindow.Show();
@@ -153,7 +177,7 @@ namespace GenbrugerApp
         }
 
         private void SqlViewer()
-        {
+        {// Martin
             SqlConnection connection = null;
             try
             {
@@ -187,7 +211,7 @@ namespace GenbrugerApp
         }
 
         private void ListViewItem_Toggle(object sender, MouseEventArgs e)
-        {
+        {// Mads
             if (Tg_Btn.IsChecked == true)
             {
                 tt_tilføj.Visibility = Visibility.Collapsed;
@@ -210,31 +234,31 @@ namespace GenbrugerApp
         }
 
         private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e)
-        {
+        {//Mads
             img_bg.Opacity = 1;
             Logo.Opacity = 1;
             Data.Opacity = 1;
         }
 
         private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
-        {
+        {// Mads
             img_bg.Opacity = 0.9;
             Logo.Opacity = 0.2;
             Data.Opacity = 0.2;
         }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        {// Mads
             Tg_Btn.IsChecked = false;
         }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
-        {
+        { // Mads
             Close();
         }
 
         private void RefreshBtn_Click(object sender, RoutedEventArgs e)
-        {
+        { // Mads
             Data.ItemsSource = null;
             SqlViewer();
         }
