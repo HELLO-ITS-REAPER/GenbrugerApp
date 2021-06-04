@@ -95,8 +95,7 @@ namespace GenbrugerApp
                 Values = new ChartValues<double>(impSum)
             });
 
-            //also adding values updates and animates the chart automatically
-            SeriesCollection[1].Values.Add(48d);
+           
 
             Labels = new[] { "Batterier", "Biler", "Elektronikaffald", "Imprægneret træ", "Inventar", "Organisk affald", "Pap og papir", "Plastemballager", "PVC", };
             Formatter = value => value.ToString("N");

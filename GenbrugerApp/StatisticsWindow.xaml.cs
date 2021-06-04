@@ -29,7 +29,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class StatisticsWindow : Window
     {
-        static bool filter;
+        static bool filter = true;
 
 
         public StatisticsWindow()
@@ -65,47 +65,53 @@ namespace GenbrugerApp
             List<double> impSum = new List<double>();
 
 
-            for (int i = 0; i < importList.Count; i++)
+            if (importList != null)
             {
-                if (importList[i].Kategori.Contains("1") && importList[i].Måleenhed.Contains("4"))
+
+
+
+                for (int i = 0; i < importList.Count; i++)
                 {
-                    batValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("2") && importList[i].Måleenhed.Contains("2"))
-                {
-                    bilValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("3") && importList[i].Måleenhed.Contains("3"))
-                {
-                    elValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("4") && importList[i].Måleenhed.Contains("4"))
-                {
-                    impValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("5") && importList[i].Måleenhed.Contains("2"))
-                {
-                    invValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("6") && importList[i].Måleenhed.Contains("4"))
-                {
-                    orgValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("7") && importList[i].Måleenhed.Contains("5"))
-                {
-                    papValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("8") && importList[i].Måleenhed.Contains("4"))
-                {
-                    plaValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else if (importList[i].Kategori.Contains("9") && importList[i].Måleenhed.Contains("2"))
-                {
-                    pvcValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
-                }
-                else
-                {
-                    filter = false;
+                    if (importList[i].Kategori.Contains("1") && importList[i].Måleenhed.Contains("4"))
+                    {
+                        batValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("2") && importList[i].Måleenhed.Contains("2"))
+                    {
+                        bilValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("3") && importList[i].Måleenhed.Contains("3"))
+                    {
+                        elValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("4") && importList[i].Måleenhed.Contains("4"))
+                    {
+                        impValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("5") && importList[i].Måleenhed.Contains("2"))
+                    {
+                        invValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("6") && importList[i].Måleenhed.Contains("4"))
+                    {
+                        orgValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("7") && importList[i].Måleenhed.Contains("5"))
+                    {
+                        papValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("8") && importList[i].Måleenhed.Contains("4"))
+                    {
+                        plaValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else if (importList[i].Kategori.Contains("9") && importList[i].Måleenhed.Contains("2"))
+                    {
+                        pvcValue.Add(Convert.ToDouble(importList[i].Mængde, CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        filter = false;
+                    }
                 }
             }
 
@@ -139,6 +145,14 @@ namespace GenbrugerApp
 
         }
 
+        private string fileName;
+        public string FileName
+        {
+            get { return fileName; }
+            set { fileName = value; }
+
+        }
+
 
 
         private void TilbageButton_Click(object sender, RoutedEventArgs e)
@@ -161,7 +175,7 @@ namespace GenbrugerApp
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
-            string fileName = "DELTA-SKRALT.csv";
+            
             //if (filter != false)
             {
                 SqlConnection connection = null;
@@ -186,6 +200,7 @@ namespace GenbrugerApp
                         }
                     }
                     connection.Close();
+                    MessageBox.Show("csv filen er uploaded til databasen");
                 }
 
                 catch (Exception ex)
