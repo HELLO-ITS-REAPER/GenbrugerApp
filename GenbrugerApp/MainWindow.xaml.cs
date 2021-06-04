@@ -10,6 +10,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using System.IO;
 using System.Globalization;
+using System.Reflection;
 
 namespace GenbrugerApp
 {
@@ -27,8 +28,8 @@ namespace GenbrugerApp
 
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            string fileName = "TeamBravo_output.csv";
-            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"CsvFolder\", fileName);
+            string fileName = "DELTA-SKRALT.csv";
+            string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\", fileName);
             var lines = File.ReadAllLines(path);
             var importList = new List<SkraldData>();
             foreach (var line in lines)

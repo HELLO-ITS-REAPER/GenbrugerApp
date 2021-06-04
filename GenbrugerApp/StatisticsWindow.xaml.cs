@@ -161,15 +161,15 @@ namespace GenbrugerApp
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (filter != false)
+            string fileName = "DELTA-SKRALT.csv";
+            //if (filter != false)
             {
                 SqlConnection connection = null;
                 try
                 {
                     connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
                     connection.Open();
-                    using (StreamReader reader = new StreamReader(@"C:\Users\Martin\OneDrive - EaDania\C#\WPF\Eksamensprojekt\GenbrugerApp\GenbrugerApp\CsvFolder\TeamBravo_output.csv"))
+                    using (StreamReader reader = new StreamReader(System.IO.Path.Combine(Environment.CurrentDirectory, @"CsvFolder\", fileName)))
                     {
                         while (!reader.EndOfStream)
                         {
