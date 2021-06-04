@@ -200,7 +200,7 @@ namespace GenbrugerApp
                         }
                     }
                     connection.Close();
-                    MessageBox.Show("csv filen er uploaded til databasen");
+                    MessageBox.Show("CSV filen er uploaded til databasen");
                 }
 
                 catch (Exception ex)
