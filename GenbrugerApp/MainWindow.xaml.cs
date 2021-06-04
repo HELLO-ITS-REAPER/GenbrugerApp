@@ -107,17 +107,34 @@ namespace GenbrugerApp
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {//Martin
-            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
-            SkraldData skraldData = (SkraldData)row.Item;
+            try
+            {
+                DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+                SkraldData skraldData = (SkraldData)row.Item;
 
-            EditWindow editWindow = new EditWindow(skraldData);
-            editWindow.Show();
-            this.Close();
+                EditWindow editWindow = new EditWindow(skraldData);
+                editWindow.Show();
+                this.Close();
+            }
+            catch (Exception)
+            {
+
+                 MessageBox.Show("der blev ikke valgt en data fra tabellen");
+            }            
+               
+            
+           
+           
+              
+           
+           
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {//Mads
-            DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
+            try
+            {
+                DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
             SkraldData skraldData = (SkraldData)row.Item;
             SqlConnection connection = null;
 
@@ -142,6 +159,12 @@ namespace GenbrugerApp
             finally
             {
                 if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+            }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("der blev ikke valgt en data fra tabellen");
             }
         }
 
