@@ -6,21 +6,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Globalization;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CsvHelper;
-using LiveCharts;
-using LiveCharts.Wpf;
-using LiveCharts.Wpf.Charts.Base;
-using Microsoft.VisualBasic.FileIO;
 
 namespace GenbrugerApp
 {
@@ -30,7 +17,6 @@ namespace GenbrugerApp
     public partial class StatisticsWindow : Window
     {
         static bool filter = true;
-
 
         public StatisticsWindow()
         {/// Frederik
@@ -46,9 +32,6 @@ namespace GenbrugerApp
             comboBoxkategori.Items.Add("Plastemballager");
             comboBoxkategori.Items.Add("PVC");
             StatsPage();
-
-
-
         }
         private async void StatsPage()
         {/// Frederik
@@ -64,12 +47,8 @@ namespace GenbrugerApp
             List<double> pvcValue = new List<double>();
             List<double> impSum = new List<double>();
 
-
             if (importList != null)
             {
-
-
-
                 for (int i = 0; i < importList.Count; i++)
                 {
                     if (importList[i].Kategori.Contains("1") && importList[i].Måleenhed.Contains("4"))
@@ -114,7 +93,6 @@ namespace GenbrugerApp
                     }
                 }
             }
-
             impSum.Add(batValue.Sum());
             impSum.Add(bilValue.Sum());
             impSum.Add(elValue.Sum());
@@ -132,17 +110,13 @@ namespace GenbrugerApp
 
             statisticsPage.ImpSum = impSum;
             mainframe.Content = statisticsPage;
-
-
         }
-
 
         private List<SkraldData> importList;
         public List<SkraldData> ImportList
         {
             get { return importList; }
             set { importList = value; }
-
         }
 
         private string fileName;
@@ -150,10 +124,7 @@ namespace GenbrugerApp
         {
             get { return fileName; }
             set { fileName = value; }
-
         }
-
-
 
         private void TilbageButton_Click(object sender, RoutedEventArgs e)
         { ///Frederik
@@ -165,12 +136,9 @@ namespace GenbrugerApp
         private void comboBoxkategori_SelectionChanged(object sender, SelectionChangedEventArgs e)
         { /// Frederik
             string kategoribox = comboBoxkategori.SelectedItem.ToString();
-
             StatisticsPage1 StatisticsPage1 = new StatisticsPage1();
             StatisticsPage1.KategoriValgt = kategoribox;
-
             mainframe1.Content = StatisticsPage1;
-
         }
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
@@ -203,12 +171,10 @@ namespace GenbrugerApp
                     connection.Close();
                     MessageBox.Show("csv filen er uploaded til databasen");
                 }
-
                 catch 
                 {
                     MessageBox.Show("Kunne ikke forbinde til databasen");
                 }
-
                 finally
                 {
                     if (connection != null && connection.State == ConnectionState.Open) connection.Close();

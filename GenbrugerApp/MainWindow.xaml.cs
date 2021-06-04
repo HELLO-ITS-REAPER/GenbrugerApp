@@ -32,7 +32,6 @@ namespace GenbrugerApp
             try
             {
                 string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
-
                 int Count = 0;
                 foreach (string file in Directory.EnumerateFiles(path))
                 {
@@ -60,11 +59,6 @@ namespace GenbrugerApp
                             Tid = Convert.ToDateTime(values[7])
                         };
                         importList.Add(data);
-
-
-
-
-
                     }
                     StatisticsWindow statisticsWindow = new StatisticsWindow();
                     statisticsWindow.Show();
@@ -75,21 +69,16 @@ namespace GenbrugerApp
                 else if (Count < 1)
                 {
                     MessageBox.Show("der blev ikke fundet en CSV fil i CsvFolder");
-
                 }
                 else if (Count > 1)
                 {
                     MessageBox.Show("Fejl der findes flere CSV filer i CsvFolder");
-
                 }
             }
             catch 
             {
                 MessageBox.Show("der var en fejl ved CSV filen i CsvFolder");
-
             }
-
-
         }
 
         private void EksportButton_Click(object sender, RoutedEventArgs e)
@@ -106,17 +95,12 @@ namespace GenbrugerApp
                         sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
                     }
                 }
-
                 MessageBox.Show("CSV filen er gemt på det lokale skrivebord");
-
             }
             catch 
             {
-
                 MessageBox.Show("kunne ikke gemme CSV filen");
-
             }
-
         }
         
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -140,16 +124,8 @@ namespace GenbrugerApp
             }
             catch (Exception)
             {
-
                  MessageBox.Show("der blev ikke valgt en data fra tabellen");
             }            
-               
-            
-           
-           
-              
-           
-           
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -159,7 +135,6 @@ namespace GenbrugerApp
                 DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
             SkraldData skraldData = (SkraldData)row.Item;
             SqlConnection connection = null;
-
             try
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
@@ -172,12 +147,10 @@ namespace GenbrugerApp
                 Data.ItemsSource = null;
                 SqlViewer();
             }
-
             catch 
             {
                     MessageBox.Show("Kunne ikke forbinde til databasen tjek internetforbindelse");
             }
-
                 finally
             {
                 if (connection != null && connection.State == ConnectionState.Open) connection.Close();
@@ -185,14 +158,12 @@ namespace GenbrugerApp
             }
             catch (Exception)
             {
-
                 MessageBox.Show("der blev ikke valgt en data fra tabellen");
             }
         }
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {// Martin
-            
             StatisticsWindow statisticsWindow = new StatisticsWindow();
             statisticsWindow.Show();
             this.Close();
@@ -284,6 +255,5 @@ namespace GenbrugerApp
             Data.ItemsSource = null;
             SqlViewer();
         }
-
     }
 }
