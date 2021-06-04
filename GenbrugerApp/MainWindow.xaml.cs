@@ -28,32 +28,59 @@ namespace GenbrugerApp
 
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            string fileName = "DELTA-SKRALT.csv";
-            string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\", fileName);
-            var lines = File.ReadAllLines(path);
-            var importList = new List<SkraldData>();
-            foreach (var line in lines)
+            
+            string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
+           
+            int Count = 0;
+            foreach (string file in Directory.EnumerateFiles(path))
             {
-                var values = line.Split(';');
-                var data = new SkraldData()
-                {
-                    SkraldeID = values[0],
-                    Mængde = values[1],
-                    Måleenhed = values[2],
-                    Kategori = values[3],
-                    Beskrivelse = values[4],
-                    Ansvarlig = values[5],
-                    CVR = values[6],
-                    Tid = Convert.ToDateTime(values[7])
-                };
-                importList.Add(data);
+                Count++;
+            }
 
+            if (Count == 1)
+            {
+                string[] filename = Directory.GetFiles(path, "*.csv");
+                string filepath = filename[0];
+                var lines = File.ReadAllLines(filepath);
+                var importList = new List<SkraldData>();
+                foreach (var line in lines)
+                {
+                    var values = line.Split(';');
+                    var data = new SkraldData()
+                    {
+                        SkraldeID = values[0],
+                        Mængde = values[1],
+                        Måleenhed = values[2],
+                        Kategori = values[3],
+                        Beskrivelse = values[4],
+                        Ansvarlig = values[5],
+                        CVR = values[6],
+                        Tid = Convert.ToDateTime(values[7])
+                    };
+                    importList.Add(data);
+
+
+
+
+
+                }
+                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                statisticsWindow.Show();
+                statisticsWindow.ImportList = importList;
+                statisticsWindow.FileName = filepath;
+                this.Close();
+            }
+            else if (Count < 1)
+            {
+                MessageBox.Show("der blev ikke fundet en CSV fil i CsvFolder");
 
             }
-            StatisticsWindow statisticsWindow = new StatisticsWindow();
-            statisticsWindow.Show();
-            statisticsWindow.ImportList = importList;
-            this.Close();
+            else if (Count > 1)
+            {
+                MessageBox.Show("Fejl der findes flere CSV filer i CsvFolder");
+
+            }
+
         }
 
         private void EksportButton_Click(object sender, RoutedEventArgs e)
