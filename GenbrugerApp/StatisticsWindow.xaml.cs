@@ -175,8 +175,8 @@ namespace GenbrugerApp
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            //if (filter != false)
+
+            if (filter != false)
             {
                 SqlConnection connection = null;
                 try
