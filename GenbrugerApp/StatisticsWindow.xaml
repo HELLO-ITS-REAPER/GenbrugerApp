@@ -13,8 +13,8 @@
     <Grid>
         <Image Source="Pictures/GenbrugerLogo.png" Margin="0,0,635,328" />
         <Rectangle Fill="#8CC53E" Height="8" VerticalAlignment="Bottom"/>
-        <Button Name="TilbageButton" Content="Tilbage" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,140,20" Width="75" Height="32" Click="TilbageButton_Click"/>
-        <Button Name="UploadButton" Content="Upload" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,30,20" Width="75" Height="32" Click="UploadButton_Click"/>
+        <Button Name="TilbageButton" Content="Tilbage" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,140,20" Width="75" Height="32" Click="TilbageButton_Click" Style="{StaticResource ButtonStyle}"/>
+        <Button Name="UploadButton" Content="Upload" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,30,20" Width="75" Height="32" Click="UploadButton_Click" Style="{StaticResource ButtonStyle}"/>
 
         <ComboBox SelectionChanged="comboBoxkategori_SelectionChanged" HorizontalAlignment="Left" Margin="150,407,0,0" SelectedIndex="0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBoxkategori"/>
 
