@@ -34,7 +34,7 @@ namespace GenbrugerApp
             foreach (var line in lines)
             {
                 var values = line.Split(';');
-                var contact = new SkraldData()
+                var data = new SkraldData()
                 {
                     SkraldeID = values[0],
                     Mængde = values[1],
@@ -45,7 +45,7 @@ namespace GenbrugerApp
                     CVR = values[6],
                     Tid = Convert.ToDateTime(values[7])
                 };
-                importList.Add(contact);
+                importList.Add(data);
 
 
             }
