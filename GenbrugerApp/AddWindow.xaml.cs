@@ -233,6 +233,20 @@ namespace GenbrugerApp
             {
                 if (connection != null && connection.State == ConnectionState.Open) connection.Close();
             }
+
+
+            CvrTxt.Clear();
+            CvrTxt.Text = "CVR";
+            AnsvarligTxt.Clear();
+            AnsvarligTxt.Text = "Ansvarlig";
+            BeskrivelseTxt.Clear();
+            BeskrivelseTxt.Text = "Beskrivelse";
+            MængdeTxt.Clear();
+            MængdeTxt.Text = "Mængde";
+            MåleenhedComboBox.Text = "Måleenhed";
+            KategoriComboBox.Text = "Vælg en kategori";
+
+
         }
     }
 }
