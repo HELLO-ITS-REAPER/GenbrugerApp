@@ -179,9 +179,9 @@ namespace GenbrugerApp
                     
 
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Forbindelsen til databasen er afbrudt tjek internetforbindelse");
                 }
                 finally
                 {

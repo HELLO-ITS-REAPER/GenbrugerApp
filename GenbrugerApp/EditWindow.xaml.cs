@@ -247,9 +247,9 @@ namespace GenbrugerApp
                     MessageBox.Show("Du SKAL udfylde alle felter, vælge kategori og måleenhed.");
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show("ændringen blev ikke gemt, kunne ikke forbinde til databasen");
             }
             finally
             {

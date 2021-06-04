@@ -29,72 +29,94 @@ namespace GenbrugerApp
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             /// Frederik / Martin
-            string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
-           
-            int Count = 0;
-            foreach (string file in Directory.EnumerateFiles(path))
+            try
             {
-                Count++;
-            }
+                string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
 
-            if (Count == 1)
-            {
-                string[] filename = Directory.GetFiles(path, "*.csv");
-                string filepath = filename[0];
-                var lines = File.ReadAllLines(filepath);
-                var importList = new List<SkraldData>();
-                foreach (var line in lines)
+                int Count = 0;
+                foreach (string file in Directory.EnumerateFiles(path))
                 {
-                    var values = line.Split(';');
-                    var data = new SkraldData()
+                    Count++;
+                }
+
+                if (Count == 1)
+                {
+                    string[] filename = Directory.GetFiles(path, "*.csv");
+                    string filepath = filename[0];
+                    var lines = File.ReadAllLines(filepath);
+                    var importList = new List<SkraldData>();
+                    foreach (var line in lines)
                     {
-                        SkraldeID = values[0],
-                        Mængde = values[1],
-                        Måleenhed = values[2],
-                        Kategori = values[3],
-                        Beskrivelse = values[4],
-                        Ansvarlig = values[5],
-                        CVR = values[6],
-                        Tid = Convert.ToDateTime(values[7])
-                    };
-                    importList.Add(data);
+                        var values = line.Split(';');
+                        var data = new SkraldData()
+                        {
+                            SkraldeID = values[0],
+                            Mængde = values[1],
+                            Måleenhed = values[2],
+                            Kategori = values[3],
+                            Beskrivelse = values[4],
+                            Ansvarlig = values[5],
+                            CVR = values[6],
+                            Tid = Convert.ToDateTime(values[7])
+                        };
+                        importList.Add(data);
 
 
 
 
+
+                    }
+                    StatisticsWindow statisticsWindow = new StatisticsWindow();
+                    statisticsWindow.Show();
+                    statisticsWindow.ImportList = importList;
+                    statisticsWindow.FileName = filepath;
+                    this.Close();
+                }
+                else if (Count < 1)
+                {
+                    MessageBox.Show("der blev ikke fundet en CSV fil i CsvFolder");
 
                 }
-                StatisticsWindow statisticsWindow = new StatisticsWindow();
-                statisticsWindow.Show();
-                statisticsWindow.ImportList = importList;
-                statisticsWindow.FileName = filepath;
-                this.Close();
+                else if (Count > 1)
+                {
+                    MessageBox.Show("Fejl der findes flere CSV filer i CsvFolder");
+
+                }
             }
-            else if (Count < 1)
+            catch 
             {
-                MessageBox.Show("der blev ikke fundet en CSV fil i CsvFolder");
+                MessageBox.Show("der var en fejl ved CSV filen i CsvFolder");
 
             }
-            else if (Count > 1)
-            {
-                MessageBox.Show("Fejl der findes flere CSV filer i CsvFolder");
 
-            }
 
         }
 
         private void EksportButton_Click(object sender, RoutedEventArgs e)
         {
             /// Frederik
-            var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
-            File.Delete(csvPath);
-            for (int i = 0; i < skraldData.Count; i++)
+            try
             {
-                using (StreamWriter sw = File.AppendText(csvPath ))
+                var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
+                File.Delete(csvPath);
+                for (int i = 0; i < skraldData.Count; i++)
                 {
-                    sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',' , '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
+                    using (StreamWriter sw = File.AppendText(csvPath))
+                    {
+                        sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
+                    }
                 }
-            }           
+
+                MessageBox.Show("CSV filen er gemt på det lokale skrivebord");
+
+            }
+            catch 
+            {
+
+                MessageBox.Show("kunne ikke gemme CSV filen");
+
+            }
+
         }
         
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -151,12 +173,12 @@ namespace GenbrugerApp
                 SqlViewer();
             }
 
-            catch (Exception ex)
+            catch 
             {
-                throw new Exception(ex.Message);
+                    MessageBox.Show("Kunne ikke forbinde til databasen tjek internetforbindelse");
             }
 
-            finally
+                finally
             {
                 if (connection != null && connection.State == ConnectionState.Open) connection.Close();
             }
@@ -200,9 +222,9 @@ namespace GenbrugerApp
                 connection.Close();
                 Data.ItemsSource = skraldData;
             }
-            catch (Exception ex)
+            catch 
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Kunne ikke forbinde til databasen tjek internetforbindelse");
             }
             finally
             {

@@ -204,9 +204,9 @@ namespace GenbrugerApp
                     MessageBox.Show("csv filen er uploaded til databasen");
                 }
 
-                catch (Exception ex)
+                catch 
                 {
-                    throw new Exception(ex.Message);
+                    MessageBox.Show("Kunne ikke forbinde til databasen");
                 }
 
                 finally
