@@ -60,6 +60,7 @@ namespace GenbrugerApp
             this.MængdeTxt.Text = skraldData.Mængde.Trim();
             this.KategoriComboBox.SelectedIndex = KategoriIntConverter - 1;
             this.MåleenhedComboBox.SelectedIndex = MåleenhedIntConverter - 1;
+            int hej;
 
             KategoriComboBox.Items.Add("Batterier");
             KategoriComboBox.Items.Add("Biler");
