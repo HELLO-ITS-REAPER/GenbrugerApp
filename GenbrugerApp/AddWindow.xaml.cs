@@ -47,6 +47,34 @@ namespace GenbrugerApp
             MåleenhedComboBox.Items.Add("Hektoliter");
         }
 
+        public void CVR_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= CVR_GotFocus;
+        }
+
+        public void Ansvarlig_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Ansvarlig_GotFocus;
+        }
+
+        public void Beskrivelse_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Beskrivelse_GotFocus;
+        }
+
+        public void Mængde_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Mængde_GotFocus;
+        }
+
         private void LUK_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -60,7 +88,6 @@ namespace GenbrugerApp
         public string Beskrivelse { get; set; }
         public string Ansvarlig { get; set; }
         public string CVR { get; set; }
-        public string AffaldspostID { get; set; }
 
 
         public int KategoriInt;
@@ -69,10 +96,10 @@ namespace GenbrugerApp
         public bool MåleenhedCheck = false;
         char currentCharacter;
         public bool CvrRequirements = false;
-        public bool AffaldspostIdRequirements = false;
         public bool AnsvarligRequirements = false;
         public bool BeskrivelseRequirements = false;
         public bool MængdeRequirements = false;
+
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             if (CvrTxt.Text.Length > 0)
@@ -84,19 +111,6 @@ namespace GenbrugerApp
                     if (char.IsNumber(currentCharacter))
                     {
                         CvrRequirements = true;
-                    }
-                }
-            }
-
-            if (AffaldspostIDTxt.Text.Length > 0)
-            {
-                for (int i = 0; i < AffaldspostIDTxt.Text.Length; i++)
-                {
-                    currentCharacter = AffaldspostIDTxt.Text[i];
-
-                    if (char.IsNumber(currentCharacter))
-                    {
-                        AffaldspostIdRequirements = true;
                     }
                 }
             }
@@ -223,9 +237,9 @@ namespace GenbrugerApp
                 string cmd = string.Format("INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid, AffaldspostID) " +
                     "VALUES('{0}', '{1}' ,'{2}', '{3}', '{4}', '{5}', format(getdate(), 'yyyy-MM-dd hh:mm'), '{6}')",
                     MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(),
-                    AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim(), AffaldspostIDTxt.Text.Trim());
+                    AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim());
 
-                if (KategoriCheck && MåleenhedCheck && CvrRequirements && AffaldspostIdRequirements &&
+                if (KategoriCheck && MåleenhedCheck && CvrRequirements &&
                     AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements)
                 {
                     SqlCommand command = new SqlCommand(cmd, connection);

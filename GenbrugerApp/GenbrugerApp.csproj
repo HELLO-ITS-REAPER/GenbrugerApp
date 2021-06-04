@@ -208,9 +208,6 @@
     <Resource Include="Pictures\icons8-cloud-refresh-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pictures\icons8-cloud-refresh-50.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Pictures\icons8-refresh-30.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
