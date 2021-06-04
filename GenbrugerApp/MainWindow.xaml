@@ -306,6 +306,7 @@
                                     Background="Transparent"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
+                                    Panel.ZIndex="10"
                                     Style="{StaticResource font_style}">
                             
                             <!--Shadow Effect-->
@@ -600,7 +601,7 @@
         <!--DataGrid-->
         <DataGrid Name="Data" AutoGenerateColumns="True" CanUserAddRows="False"
                   IsReadOnly="True" SelectionMode="Single" Height="350" 
-                  Width="900" Margin="89,116,35,18.5" >
+                  Width="900" Margin="89,116,35,18.5" Panel.ZIndex="1">
         </DataGrid>
     </Grid>
 </Window>
