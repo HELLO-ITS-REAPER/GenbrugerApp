@@ -64,7 +64,7 @@ namespace GenbrugerApp
             {
                 using (StreamWriter sw = File.AppendText(csvPath ))
                 {
-                    sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',' , '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + skraldData[i].Tid);
+                    sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',' , '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
                 }
             }           
         }
