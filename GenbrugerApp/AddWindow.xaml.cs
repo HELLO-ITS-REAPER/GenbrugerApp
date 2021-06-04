@@ -47,6 +47,34 @@ namespace GenbrugerApp
             MåleenhedComboBox.Items.Add("Hektoliter");
         }
 
+        public void CVR_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= CVR_GotFocus;
+        }
+
+        public void Ansvarlig_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Ansvarlig_GotFocus;
+        }
+
+        public void Beskrivelse_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Beskrivelse_GotFocus;
+        }
+
+        public void Mængde_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Mængde_GotFocus;
+        }
+
         private void LUK_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -60,7 +88,6 @@ namespace GenbrugerApp
         public string Beskrivelse { get; set; }
         public string Ansvarlig { get; set; }
         public string CVR { get; set; }
-        public string AffaldspostID { get; set; }
 
 
         public int KategoriInt;
@@ -72,6 +99,7 @@ namespace GenbrugerApp
         public bool AnsvarligRequirements = false;
         public bool BeskrivelseRequirements = false;
         public bool MængdeRequirements = false;
+
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             if (CvrTxt.Text.Length == 8)
