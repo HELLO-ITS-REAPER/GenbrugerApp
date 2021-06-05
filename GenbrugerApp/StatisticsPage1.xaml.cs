@@ -192,7 +192,8 @@ namespace GenbrugerApp
                 SeriesCollection = new SeriesCollection
             {
                 new LineSeries
-                {                    Title = "",
+                {                    
+                    Title = "",
 
                     Values = new ChartValues<double>(focusedValues)
                 }
