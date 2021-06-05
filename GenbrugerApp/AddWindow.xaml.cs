@@ -258,6 +258,20 @@ namespace GenbrugerApp
             {
                 MessageBox.Show(ex.Message);
             }
+
+
+            CvrTxt.Clear();
+            CvrTxt.Text = "CVR";
+            AnsvarligTxt.Clear();
+            AnsvarligTxt.Text = "Ansvarlig";
+            BeskrivelseTxt.Clear();
+            BeskrivelseTxt.Text = "Beskrivelse";
+            MængdeTxt.Clear();
+            MængdeTxt.Text = "Mængde";
+            MåleenhedComboBox.Text = "Måleenhed";
+            KategoriComboBox.Text = "Vælg en kategori";
+
+
         }
     }
 }

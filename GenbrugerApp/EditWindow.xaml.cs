@@ -22,6 +22,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class EditWindow : Window
     {
+        /// Martin
         public Repository repository = new Repository();
         public SkraldData skraldData;
         public string Mængde { get; set; }

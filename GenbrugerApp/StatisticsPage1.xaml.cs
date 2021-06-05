@@ -202,10 +202,6 @@ namespace GenbrugerApp
                 Labels = new[] { tid0, tid1,tid2,tid3,tid4, tid5 , tid6 , tid7 , tid8 , tid9, tid10 };
                 YFormatter = value => value.ToString("C");
 
-               
-
-                //modifying any series values will also animate and update the chart
-
                 DataContext = this;
             }
         }
