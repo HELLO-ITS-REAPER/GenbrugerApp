@@ -180,6 +180,11 @@ namespace GenbrugerApp
                     if (connection != null && connection.State == ConnectionState.Open) connection.Close();
                 }
             }
+            else if (filter == false)
+            {
+                MessageBox.Show("den importeret data overholder ikke reglerne og kan derfor ikke blive uploaded til databasen");
+
+            }
         }
     }
 }
