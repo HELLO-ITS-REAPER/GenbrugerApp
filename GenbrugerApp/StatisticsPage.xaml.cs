@@ -62,9 +62,9 @@ namespace GenbrugerApp
                     allValues.Clear();
 
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Kunne ikke hente data til siden.");
                 }
                 finally
                 {

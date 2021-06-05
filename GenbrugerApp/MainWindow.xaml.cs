@@ -19,6 +19,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Repository repository = new Repository();
         private List<SkraldData> skraldData = new List<SkraldData>();
         public MainWindow()
         {
@@ -28,73 +29,85 @@ namespace GenbrugerApp
 
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
+            try
             /// Frederik / Martin
             string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
            
             int Count = 0;
             foreach (string file in Directory.EnumerateFiles(path))
             {
-                Count++;
-            }
+                string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
 
-            if (Count == 1)
-            {
-                string[] filename = Directory.GetFiles(path, "*.csv");
-                string filepath = filename[0];
-                var lines = File.ReadAllLines(filepath);
-                var importList = new List<SkraldData>();
-                foreach (var line in lines)
+                int Count = 0;
+                foreach (string file in Directory.EnumerateFiles(path))
                 {
-                    var values = line.Split(';');
-                    var data = new SkraldData()
-                    {
-                        SkraldeID = values[0],
-                        Mængde = values[1],
-                        Måleenhed = values[2],
-                        Kategori = values[3],
-                        Beskrivelse = values[4],
-                        Ansvarlig = values[5],
-                        CVR = values[6],
-                        Tid = Convert.ToDateTime(values[7])
-                    };
-                    importList.Add(data);
-
-
-
-
-
+                    Count++;
                 }
-                StatisticsWindow statisticsWindow = new StatisticsWindow();
-                statisticsWindow.Show();
-                statisticsWindow.ImportList = importList;
-                statisticsWindow.FileName = filepath;
-                this.Close();
+
+                if (Count == 1)
+                {
+                    string[] filename = Directory.GetFiles(path, "*.csv");
+                    string filepath = filename[0];
+                    var lines = File.ReadAllLines(filepath);
+                    var importList = new List<SkraldData>();
+                    foreach (var line in lines)
+                    {
+                        var values = line.Split(';');
+                        var data = new SkraldData()
+                        {
+                            SkraldeID = values[0],
+                            Mængde = values[1],
+                            Måleenhed = values[2],
+                            Kategori = values[3],
+                            Beskrivelse = values[4],
+                            Ansvarlig = values[5],
+                            CVR = values[6],
+                            Tid = Convert.ToDateTime(values[7])
+                        };
+                        importList.Add(data);
+                    }
+                    StatisticsWindow statisticsWindow = new StatisticsWindow();
+                    statisticsWindow.Show();
+                    statisticsWindow.ImportList = importList;
+                    statisticsWindow.FileName = filepath;
+                    this.Close();
+                }
+                else if (Count < 1)
+                {
+                    MessageBox.Show("Der blev ikke fundet en CSV fil i CsvFolder");
+                }
+                else if (Count > 1)
+                {
+                    MessageBox.Show("Der findes flere CSV filer i CsvFolder");
+                }
             }
-            else if (Count < 1)
+            catch
             {
-                MessageBox.Show("der blev ikke fundet en CSV fil i CsvFolder");
-
+                MessageBox.Show("Filen kunne ikke blive indlæst.");
             }
-            else if (Count > 1)
-            {
-                MessageBox.Show("Fejl der findes flere CSV filer i CsvFolder");
-
-            }
-
         }
 
         private void EksportButton_Click(object sender, RoutedEventArgs e)
         {
             /// Frederik
-            var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
-            File.Delete(csvPath);
-            for (int i = 0; i < skraldData.Count; i++)
+            try
             {
-                using (StreamWriter sw = File.AppendText(csvPath ))
+                var csvPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"DELTA-SKRALT.csv");
+                File.Delete(csvPath);
+                for (int i = 0; i < skraldData.Count; i++)
                 {
-                    sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',' , '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
+                    using (StreamWriter sw = File.AppendText(csvPath))
+                    {
+                        sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
+                    }
                 }
-            }           
+                Logger.SaveMessage("Brugeren har eksporteret data fra databasen til " + csvPath);
+            }
+            catch
+            {
+                MessageBox.Show("Kunne ikke gemme filen.");
+            }
+            
         }
         
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -136,29 +149,27 @@ namespace GenbrugerApp
             {
                 DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
             SkraldData skraldData = (SkraldData)row.Item;
-            SqlConnection connection = null;
-
             try
             {
-                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                string cmd = string.Format("DELETE FROM Skrald WHERE SkraldeID = '{0}'", skraldData.SkraldeID);
-
-                SqlCommand command = new SqlCommand(cmd, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                repository.Delete(skraldData.SkraldeID);
                 MessageBox.Show("Din valgte data er nu blevet slettet.");
+                Logger.SaveMessage("Brugeren har slettet en data fra databasen\n" +
+                    "Den slettede date:" +
+                    "\nSkraldID = '" + skraldData.SkraldeID + "'," +
+                    "\nMængde = '" + skraldData.Mængde + "'," +
+                    "\nMåleenhed = '" + skraldData.Måleenhed + "'," +
+                    "\nKategori = '" + skraldData.Kategori + "'," +
+                    "\nBeskrivelse = '" + skraldData.Beskrivelse +
+                    "\nAnsvarlig = '" + skraldData.Ansvarlig + "'," +
+                    "\nCVR = '" + skraldData.CVR + "'," +
+                    "\nTid = '" + skraldData.Tid + "'" +
+                    "\nDenne data blev slettet");
                 Data.ItemsSource = null;
                 SqlViewer();
             }
-
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
-            }
-
-            finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+                MessageBox.Show("Kunne ikke slette den valgte data, prøv igen.");
             }
             }
             catch (Exception)

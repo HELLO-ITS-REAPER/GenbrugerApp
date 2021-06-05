@@ -171,13 +171,7 @@ namespace GenbrugerApp
                         tid8 = focusedTime[8];
                         tid9 = focusedTime[9];
                         tid10 = focusedTime[10];
-
                     }
-                       
-                    
-
-                    
-
                 }
                 catch (Exception ex)
                 {
