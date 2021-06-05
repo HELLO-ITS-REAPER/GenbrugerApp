@@ -23,6 +23,7 @@ namespace GenbrugerApp
     public partial class EditWindow : Window
     {
         /// Martin
+        public Repository repository = new Repository();
         public SkraldData skraldData;
         public string Mængde { get; set; }
         public string Måleenhed { get; set; }
@@ -225,35 +226,41 @@ namespace GenbrugerApp
                     break;
             }
 
-            SqlConnection connection = null;
             try
             {
-                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Kategori = '{2}', Beskrivelse = '{3}', Ansvarlig = '{4}'" +
-                    ", CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{8}'",
-                    MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(), AnsvarligTxt.Text.Trim(), 
-                    CvrTxt.Text.Trim(), TidTxt.Text.Trim(), skraldData.SkraldeID);
-
                 if (KategoriCheck && MåleenhedCheck && CvrRequirements && 
                     AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements && TidRequirements)
                 {
-                    SqlCommand command = new SqlCommand(cmd, connection);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+                    repository.Edit(MængdeTxt.Text, MåleenhedInt, KategoriInt, BeskrivelseTxt.Text, AnsvarligTxt.Text
+                        ,CvrTxt.Text, TidTxt.Text, skraldData.SkraldeID.ToString());
                     MessageBox.Show("Dine ændringer er nu opdateret.");
+                    Logger.SaveMessage("Brugeren har redigeret en data i databasen\n" +
+                    "Den tidligere data:" +
+                    "\nMængde = '" + skraldData.Mængde + "'," +
+                    "\nMåleenhed = '" + skraldData.Måleenhed + "'," +
+                    "\nKategori = '" + skraldData.Kategori + "'," +
+                    "\nBeskrivelse = '" + skraldData.Beskrivelse +
+                    "\nAnsvarlig = '" + skraldData.Ansvarlig + "'," +
+                    "\nCVR = '" + skraldData.CVR + "'," +
+                    "\nTid = '" + skraldData.Tid + "'" +
+                    "\n\nDen nye data:" +
+                    "\nMængde = '" + MængdeTxt.Text + "'," +
+                    "\nMåleenhed = '" + MåleenhedInt + "'," +
+                    "\nKategori = '" + KategoriInt + "'," +
+                    "\nBeskrivelse = '" + BeskrivelseTxt.Text +
+                    "\nAnsvarlig = '" + AnsvarligTxt.Text + "'," +
+                    "\nCVR = '" + CvrTxt.Text + "'," +
+                    "\nTid = '" + TidTxt.Text + "'" +
+                    "\nDenne data blev redigeret");
                 }
                 else
                 {
-                    MessageBox.Show("Du SKAL udfylde alle felter, vælge kategori og måleenhed.");
+                    MessageBox.Show("Du skal udfylde alle felterne.");
                 }
             }
             catch 
             {
-                MessageBox.Show("ændringen blev ikke gemt, kunne ikke forbinde til databasen");
-            }
-            finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+                MessageBox.Show(ex.Message);
             }
         }
 

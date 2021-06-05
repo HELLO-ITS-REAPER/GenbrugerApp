@@ -7,9 +7,8 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="StatisticsWindow" Height="513" Width="1030"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <!--Frederik-->
-
     <Grid>
         <Image Source="Pictures/GenbrugerLogo.png" Margin="0,0,635,328" />
         <Rectangle Fill="#8CC53E" Height="8" VerticalAlignment="Bottom"/>
@@ -18,7 +17,7 @@
 
         <ComboBox SelectionChanged="comboBoxkategori_SelectionChanged" HorizontalAlignment="Left" Margin="150,407,0,0" SelectedIndex="0" VerticalAlignment="Top" Height="24" Width="168" Name="comboBoxkategori"/>
 
-    
+
         <Frame Height="250" Width="500" HorizontalAlignment="Right" VerticalAlignment="Center"  Name="mainframe" Margin="0,60,5,0"/>
         <Frame NavigationUIVisibility="Hidden" Height="250" Width="500" HorizontalAlignment="Left" VerticalAlignment="Center"  Name="mainframe1" Margin="0,60,5,0"/>
 

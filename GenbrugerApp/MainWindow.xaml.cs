@@ -19,6 +19,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Repository repository = new Repository();
         private List<SkraldData> skraldData = new List<SkraldData>();
         public MainWindow()
         {
@@ -28,9 +29,11 @@ namespace GenbrugerApp
 
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            /// Frederik / Martin
+
+
             try
             {
+                /// Frederik / Martin
                 string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
                 int Count = 0;
                 foreach (string file in Directory.EnumerateFiles(path))
@@ -68,16 +71,16 @@ namespace GenbrugerApp
                 }
                 else if (Count < 1)
                 {
-                    MessageBox.Show("der blev ikke fundet en CSV fil i CsvFolder");
+                    MessageBox.Show("Der blev ikke fundet en CSV fil i CsvFolder");
                 }
                 else if (Count > 1)
                 {
-                    MessageBox.Show("Fejl der findes flere CSV filer i CsvFolder");
+                    MessageBox.Show("Der findes flere CSV filer i CsvFolder");
                 }
             }
-            catch 
+            catch
             {
-                MessageBox.Show("der var en fejl ved CSV filen i CsvFolder");
+                MessageBox.Show("Filen kunne ikke blive indlæst.");
             }
         }
 
@@ -95,14 +98,16 @@ namespace GenbrugerApp
                         sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
                     }
                 }
-                MessageBox.Show("CSV filen er gemt på det lokale skrivebord");
+                MessageBox.Show("CSV filen er gemt " + csvPath);
+                Logger.SaveMessage("Brugeren har eksporteret data fra databasen til " + csvPath);
             }
-            catch 
+            catch
             {
-                MessageBox.Show("kunne ikke gemme CSV filen");
+                MessageBox.Show("Kunne ikke gemme filen.");
             }
+
         }
-        
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             ///Martin
@@ -124,8 +129,9 @@ namespace GenbrugerApp
             }
             catch (Exception)
             {
-                 MessageBox.Show("der blev ikke valgt en data fra tabellen");
-            }            
+
+                MessageBox.Show("der blev ikke valgt en data fra tabellen");
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -133,28 +139,29 @@ namespace GenbrugerApp
             try
             {
                 DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
-            SkraldData skraldData = (SkraldData)row.Item;
-            SqlConnection connection = null;
-            try
-            {
-                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                string cmd = string.Format("DELETE FROM Skrald WHERE SkraldeID = '{0}'", skraldData.SkraldeID);
-
-                SqlCommand command = new SqlCommand(cmd, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                MessageBox.Show("Din valgte data er nu blevet slettet.");
-                Data.ItemsSource = null;
-                SqlViewer();
-            }
-            catch 
-            {
-                    MessageBox.Show("Kunne ikke forbinde til databasen tjek internetforbindelse");
-            }
-                finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
-            }
+                SkraldData skraldData = (SkraldData)row.Item;
+                try
+                {
+                    repository.Delete(skraldData.SkraldeID);
+                    MessageBox.Show("Din valgte data er nu blevet slettet.");
+                    Logger.SaveMessage("Brugeren har slettet en data fra databasen\n" +
+                        "Den slettede date:" +
+                        "\nSkraldID = '" + skraldData.SkraldeID + "'," +
+                        "\nMængde = '" + skraldData.Mængde + "'," +
+                        "\nMåleenhed = '" + skraldData.Måleenhed + "'," +
+                        "\nKategori = '" + skraldData.Kategori + "'," +
+                        "\nBeskrivelse = '" + skraldData.Beskrivelse +
+                        "\nAnsvarlig = '" + skraldData.Ansvarlig + "'," +
+                        "\nCVR = '" + skraldData.CVR + "'," +
+                        "\nTid = '" + skraldData.Tid + "'" +
+                        "\nDenne data blev slettet");
+                    Data.ItemsSource = null;
+                    SqlViewer();
+                }
+                catch
+                {
+                    MessageBox.Show("Kunne ikke slette den valgte data, prøv igen.");
+                }
             }
             catch (Exception)
             {
@@ -164,6 +171,7 @@ namespace GenbrugerApp
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {// Martin
+
             StatisticsWindow statisticsWindow = new StatisticsWindow();
             statisticsWindow.Show();
             this.Close();

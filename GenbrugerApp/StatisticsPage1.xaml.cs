@@ -171,13 +171,7 @@ namespace GenbrugerApp
                         tid8 = focusedTime[8];
                         tid9 = focusedTime[9];
                         tid10 = focusedTime[10];
-
                     }
-                       
-                    
-
-                    
-
                 }
                 catch 
                 {
@@ -198,7 +192,8 @@ namespace GenbrugerApp
                 SeriesCollection = new SeriesCollection
             {
                 new LineSeries
-                {                    Title = "",
+                {                    
+                    Title = "",
 
                     Values = new ChartValues<double>(focusedValues)
                 }
