@@ -229,8 +229,8 @@ namespace GenbrugerApp
             {
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
                 string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Kategori = '{2}', Beskrivelse = '{3}', Ansvarlig = '{4}'" +
-                    ", CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{8}'",
-                    MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(), AnsvarligTxt.Text.Trim(), 
+                    ", CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{7}'",
+                    MængdeTxt.Text.Trim().Replace(",", "."), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(), AnsvarligTxt.Text.Trim(), 
                     CvrTxt.Text.Trim(), TidTxt.Text.Trim(), skraldData.SkraldeID);
 
                 if (KategoriCheck && MåleenhedCheck && CvrRequirements && 
@@ -238,12 +238,30 @@ namespace GenbrugerApp
                 {
                     SqlCommand command = new SqlCommand(cmd, connection);
                     connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+                    command.ExecuteNonQuery();
                     MessageBox.Show("Dine ændringer er nu opdateret.");
+                    Logger.SaveMessage("Brugeren har redigeret en data i databasen\n" +
+                    "Den tidligere data:" +
+                    "\nMængde = '" + skraldData.Mængde + "'," +
+                    "\nMåleenhed = '" + skraldData.Måleenhed + "'," +
+                    "\nKategori = '" + skraldData.Kategori + "'," +
+                    "\nBeskrivelse = '" + skraldData.Beskrivelse +
+                    "\nAnsvarlig = '" + skraldData.Ansvarlig + "'," +
+                    "\nCVR = '" + skraldData.CVR + "'," +
+                    "\nTid = '" + skraldData.Tid + "'" +
+                    "\n\nDen nye data:" +
+                    "\nMængde = '" + MængdeTxt.Text + "'," +
+                    "\nMåleenhed = '" + MåleenhedInt + "'," +
+                    "\nKategori = '" + KategoriInt + "'," +
+                    "\nBeskrivelse = '" + BeskrivelseTxt.Text +
+                    "\nAnsvarlig = '" + AnsvarligTxt.Text + "'," +
+                    "\nCVR = '" + CvrTxt.Text + "'," +
+                    "\nTid = '" + TidTxt.Text + "'" +
+                    "\nDenne data blev redigeret");
                 }
                 else
                 {
-                    MessageBox.Show("Du SKAL udfylde alle felter, vælge kategori og måleenhed.");
+                    MessageBox.Show("Du skal udfylde alle felterne.");
                 }
             }
             catch (Exception ex)

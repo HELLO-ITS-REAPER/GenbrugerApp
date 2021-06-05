@@ -236,7 +236,7 @@ namespace GenbrugerApp
                 connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
                 string cmd = string.Format("INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
                     "VALUES('{0}', '{1}' ,'{2}', '{3}', '{4}', '{5}', format(getdate(), 'yyyy-MM-dd hh:mm'))",
-                    MængdeTxt.Text.Trim(), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(),
+                    MængdeTxt.Text.Trim().Replace(",", "."), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(),
                     AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim());
 
                 if (KategoriCheck && MåleenhedCheck && CvrRequirements &&
@@ -246,6 +246,16 @@ namespace GenbrugerApp
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     MessageBox.Show("Din data er nu uploadet.");
+                    Logger.SaveMessage("Brugeren har tilføjet en data til databasen\n" +
+                    "Den tilføjede data:" +
+                    "\nMængde = '" + MængdeTxt.Text + "'," +
+                    "\nMåleenhed = '" + MåleenhedInt + "'," +
+                    "\nKategori = '" + KategoriInt + "'," +
+                    "\nBeskrivelse = '" + BeskrivelseTxt.Text +
+                    "\nAnsvarlig = '" + AnsvarligTxt.Text + "'," +
+                    "\nCVR = '" + CvrTxt.Text + "'," +
+                    "\nTid = '" + DateTime.Now + "'" +
+                    "\nDenne data blev tilføjet");
                 }
                 else
                 {

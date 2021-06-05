@@ -189,7 +189,7 @@ namespace GenbrugerApp
                         {
                             var line = reader.ReadLine();
                             var values = line.Split(';');
-                            var sql = "INSERT INTO Test (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
+                            var sql = "INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
                                 "VALUES ('" + values[1] + "','" + values[2] + "','" + values[3] + "','" + values[4] + "','" + values[5] + "','" + values[6] +
                                 "','" + values[7] + "')";
                             var cmd = new SqlCommand();
@@ -201,6 +201,7 @@ namespace GenbrugerApp
                     }
                     connection.Close();
                     MessageBox.Show("CSV filen er uploaded til databasen");
+                    Logger.SaveMessage("Brugeren har uploadet filen '" + fileName + "'s data til databasen");
                 }
 
                 catch (Exception ex)
