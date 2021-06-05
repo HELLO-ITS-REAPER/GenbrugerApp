@@ -82,16 +82,14 @@ namespace GenbrugerApp
                 new ColumnSeries
                 {
 
-                    Title = "current data",
+                    Title = "Database data",
                     Values = new ChartValues<double>(allSum)
                 }
             };
 
-
-            //adding series will update and animate the chart automatically
             SeriesCollection.Add(new ColumnSeries
             {
-                Title = "external data",
+                Title = "Imported data",
                 Values = new ChartValues<double>(impSum)
             });
 
