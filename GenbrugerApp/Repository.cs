@@ -40,26 +40,45 @@ namespace GenbrugerApp
             }
         }
 
-        //public void Edit(string Mængde, int Måleenhed, int Kategori, string Beskrivelse, string Ansvarlig, string CVR, string Tid, string SkraldeID)
-        //{
-        //    try
-        //    {
-        //        string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Kategori = '{2}', Beskrivelse = '{3}', Ansvarlig = '{4}', " +
-        //            "CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{7}'",
-        //            Mængde.Trim(), Måleenhed, Kategori, Beskrivelse.Trim(), Ansvarlig.Trim(),
-        //            CVR.Trim(), Tid.Trim(), SkraldeID);
-        //        SqlCommand command = new SqlCommand(cmd, connection);
-        //        connection.Open();
-        //        SqlDataReader reader = command.ExecuteReader();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        if (connection != null && connection.State == ConnectionState.Open) connection.Close();
-        //    }
-        //}
+        public void Edit(string Mængde, int Måleenhed, int Kategori, string Beskrivelse, string Ansvarlig, string CVR, string Tid, string SkraldeID)
+        {
+            try
+            {
+                string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Kategori = '{2}', Beskrivelse = '{3}', Ansvarlig = '{4}', " +
+                    "CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{7}'",
+                    Mængde.Trim().Replace(",", "."), Måleenhed, Kategori, Beskrivelse.Trim(), Ansvarlig.Trim(),
+                    CVR.Trim(), Tid.Trim(), SkraldeID.Trim());
+                SqlCommand command = new SqlCommand(cmd, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+            }
+        }
+
+        public void Delete(string SkraldeID)
+        {
+            try
+            {
+                string cmd = string.Format("DELETE FROM Skrald WHERE SkraldeID = '{0}'", SkraldeID.Trim());
+                SqlCommand command = new SqlCommand(cmd, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+            }
+        }
     }
 }

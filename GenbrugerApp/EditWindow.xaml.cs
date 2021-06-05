@@ -22,6 +22,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class EditWindow : Window
     {
+        public Repository repository = new Repository();
         public SkraldData skraldData;
         public string Mængde { get; set; }
         public string Måleenhed { get; set; }
@@ -224,21 +225,13 @@ namespace GenbrugerApp
                     break;
             }
 
-            SqlConnection connection = null;
             try
             {
-                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                string cmd = string.Format("UPDATE Skrald SET Mængde = '{0}', Måleenhed = '{1}', Kategori = '{2}', Beskrivelse = '{3}', Ansvarlig = '{4}'" +
-                    ", CVR = '{5}', Tid = '{6}' WHERE SkraldeID = '{7}'",
-                    MængdeTxt.Text.Trim().Replace(",", "."), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(), AnsvarligTxt.Text.Trim(), 
-                    CvrTxt.Text.Trim(), TidTxt.Text.Trim(), skraldData.SkraldeID);
-
                 if (KategoriCheck && MåleenhedCheck && CvrRequirements && 
                     AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements && TidRequirements)
                 {
-                    SqlCommand command = new SqlCommand(cmd, connection);
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    repository.Edit(MængdeTxt.Text, MåleenhedInt, KategoriInt, BeskrivelseTxt.Text, AnsvarligTxt.Text
+                        ,CvrTxt.Text, TidTxt.Text, skraldData.SkraldeID.ToString());
                     MessageBox.Show("Dine ændringer er nu opdateret.");
                     Logger.SaveMessage("Brugeren har redigeret en data i databasen\n" +
                     "Den tidligere data:" +
@@ -266,11 +259,7 @@ namespace GenbrugerApp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+                MessageBox.Show(ex.Message);
             }
         }
 

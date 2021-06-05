@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GenbrugerApp"
         mc:Ignorable="d"
         Title="EditWindow" Height="265" Width="500"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,77,0,0" TextWrapping="Wrap" Text="CVR" Name="CvrTxt" VerticalAlignment="Top" Width="168"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="13,106,0,0" TextWrapping="Wrap" Text="Ansvarlig" Name="AnsvarligTxt" VerticalAlignment="Top" Width="168"/>

@@ -8,7 +8,7 @@
 
         mc:Ignorable="d"
         Title="StatisticsWindow" Height="513" Width="1030"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Image Source="Pictures/GenbrugerLogo.png" Margin="0,0,635,328" />
         <Rectangle Fill="#8CC53E" Height="8" VerticalAlignment="Bottom"/>

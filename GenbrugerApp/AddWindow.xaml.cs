@@ -22,7 +22,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class AddWindow : Window
     {
-        private List<SkraldData> list = new List<SkraldData>();
+        public Repository repository = new Repository();
         public AddWindow()
         {
             InitializeComponent();
@@ -230,21 +230,13 @@ namespace GenbrugerApp
                 default:
                     break;
             }
-            SqlConnection connection = null;
             try
             {
-                connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
-                string cmd = string.Format("INSERT INTO Skrald (Mængde, Måleenhed, Kategori, Beskrivelse, Ansvarlig, CVR, Tid) " +
-                    "VALUES('{0}', '{1}' ,'{2}', '{3}', '{4}', '{5}', format(getdate(), 'yyyy-MM-dd hh:mm'))",
-                    MængdeTxt.Text.Trim().Replace(",", "."), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text.Trim(),
-                    AnsvarligTxt.Text.Trim(), CvrTxt.Text.Trim());
-
                 if (KategoriCheck && MåleenhedCheck && CvrRequirements &&
                     AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements)
                 {
-                    SqlCommand command = new SqlCommand(cmd, connection);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+                    repository.Add(MængdeTxt.Text.Replace(",", "."), MåleenhedInt, KategoriInt, BeskrivelseTxt.Text,
+                    AnsvarligTxt.Text, CvrTxt.Text);
                     MessageBox.Show("Din data er nu uploadet.");
                     Logger.SaveMessage("Brugeren har tilføjet en data til databasen\n" +
                     "Den tilføjede data:" +
@@ -259,16 +251,12 @@ namespace GenbrugerApp
                 }
                 else
                 {
-                    MessageBox.Show("Du SKAL vælge udfylde alle felter, vælge kategori og måleenhed.");
+                    MessageBox.Show("Du skal udfylde alle felter.");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                if (connection != null && connection.State == ConnectionState.Open) connection.Close();
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -126,23 +126,19 @@ namespace GenbrugerApp
             impSum.Add(pvcValue.Sum());
             if (filter == false)
             {
-                MessageBox.Show("En eller flere elementer i importeret data opfylder ikke kravene");
+                MessageBox.Show("En eller flere elementer i den importerede data opfylder ikke kravene.");
             }
             StatisticsPage statisticsPage = new StatisticsPage();
 
             statisticsPage.ImpSum = impSum;
             mainframe.Content = statisticsPage;
-
-
         }
-
 
         private List<SkraldData> importList;
         public List<SkraldData> ImportList
         {
             get { return importList; }
             set { importList = value; }
-
         }
 
         private string fileName;
@@ -150,7 +146,6 @@ namespace GenbrugerApp
         {
             get { return fileName; }
             set { fileName = value; }
-
         }
 
 
