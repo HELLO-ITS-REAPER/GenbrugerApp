@@ -29,15 +29,12 @@ namespace GenbrugerApp
 
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            /// Frederik / Martin
-            string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
-           
-            int Count = 0;
-            foreach (string file in Directory.EnumerateFiles(path))
-            {
-                string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
 
+
+            try
+            {
+                /// Frederik / Martin
+                string path = Path.Combine(Environment.CurrentDirectory, @"CsvFolder\");
                 int Count = 0;
                 foreach (string file in Directory.EnumerateFiles(path))
                 {
@@ -101,15 +98,16 @@ namespace GenbrugerApp
                         sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
                     }
                 }
+                MessageBox.Show("CSV filen er gemt " + csvPath);
                 Logger.SaveMessage("Brugeren har eksporteret data fra databasen til " + csvPath);
             }
             catch
             {
                 MessageBox.Show("Kunne ikke gemme filen.");
             }
-            
+
         }
-        
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             ///Martin
@@ -132,15 +130,8 @@ namespace GenbrugerApp
             catch (Exception)
             {
 
-                 MessageBox.Show("der blev ikke valgt en data fra tabellen");
-            }            
-               
-            
-           
-           
-              
-           
-           
+                MessageBox.Show("der blev ikke valgt en data fra tabellen");
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -148,29 +139,29 @@ namespace GenbrugerApp
             try
             {
                 DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
-            SkraldData skraldData = (SkraldData)row.Item;
-            try
-            {
-                repository.Delete(skraldData.SkraldeID);
-                MessageBox.Show("Din valgte data er nu blevet slettet.");
-                Logger.SaveMessage("Brugeren har slettet en data fra databasen\n" +
-                    "Den slettede date:" +
-                    "\nSkraldID = '" + skraldData.SkraldeID + "'," +
-                    "\nMængde = '" + skraldData.Mængde + "'," +
-                    "\nMåleenhed = '" + skraldData.Måleenhed + "'," +
-                    "\nKategori = '" + skraldData.Kategori + "'," +
-                    "\nBeskrivelse = '" + skraldData.Beskrivelse +
-                    "\nAnsvarlig = '" + skraldData.Ansvarlig + "'," +
-                    "\nCVR = '" + skraldData.CVR + "'," +
-                    "\nTid = '" + skraldData.Tid + "'" +
-                    "\nDenne data blev slettet");
-                Data.ItemsSource = null;
-                SqlViewer();
-            }
-            catch
-            {
-                MessageBox.Show("Kunne ikke slette den valgte data, prøv igen.");
-            }
+                SkraldData skraldData = (SkraldData)row.Item;
+                try
+                {
+                    repository.Delete(skraldData.SkraldeID);
+                    MessageBox.Show("Din valgte data er nu blevet slettet.");
+                    Logger.SaveMessage("Brugeren har slettet en data fra databasen\n" +
+                        "Den slettede date:" +
+                        "\nSkraldID = '" + skraldData.SkraldeID + "'," +
+                        "\nMængde = '" + skraldData.Mængde + "'," +
+                        "\nMåleenhed = '" + skraldData.Måleenhed + "'," +
+                        "\nKategori = '" + skraldData.Kategori + "'," +
+                        "\nBeskrivelse = '" + skraldData.Beskrivelse +
+                        "\nAnsvarlig = '" + skraldData.Ansvarlig + "'," +
+                        "\nCVR = '" + skraldData.CVR + "'," +
+                        "\nTid = '" + skraldData.Tid + "'" +
+                        "\nDenne data blev slettet");
+                    Data.ItemsSource = null;
+                    SqlViewer();
+                }
+                catch
+                {
+                    MessageBox.Show("Kunne ikke slette den valgte data, prøv igen.");
+                }
             }
             catch (Exception)
             {
@@ -181,7 +172,7 @@ namespace GenbrugerApp
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {// Martin
-            
+
             StatisticsWindow statisticsWindow = new StatisticsWindow();
             statisticsWindow.Show();
             this.Close();
