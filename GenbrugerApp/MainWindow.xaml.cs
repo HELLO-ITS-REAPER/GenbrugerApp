@@ -29,8 +29,6 @@ namespace GenbrugerApp
 
         public void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-
-
             try
             {
                 /// Frederik / Martin
@@ -95,7 +93,9 @@ namespace GenbrugerApp
                 {
                     using (StreamWriter sw = File.AppendText(csvPath))
                     {
-                        sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
+                        sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + 
+                            skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + 
+                            Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
                     }
                 }
                 MessageBox.Show("CSV filen er gemt " + csvPath);
@@ -105,7 +105,6 @@ namespace GenbrugerApp
             {
                 MessageBox.Show("Kunne ikke gemme filen.");
             }
-
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
