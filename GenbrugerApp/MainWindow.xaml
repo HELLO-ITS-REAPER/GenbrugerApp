@@ -58,11 +58,11 @@
 
         </Style>
 
-        <!--App Close Button Style-->
+        <!--App Signout Button Style-->
 
-        <ImageBrush x:Key="CloseBtn_MouseOver" ImageSource="Pictures/icons8-macos-close-30.png"/>
+        <ImageBrush x:Key="SignoutBtn_MouseOver" ImageSource="Pictures/icons8-exit-32.png"/>
 
-        <Style x:Key="Close_btn" TargetType="{x:Type Button}">
+        <Style x:Key="Signout_btn" TargetType="{x:Type Button}">
 
             <Setter Property="Template">
 
@@ -84,7 +84,7 @@
 
                                 <Setter Property="Background"
                                         TargetName="button"
-                                        Value="{StaticResource CloseBtn_MouseOver}"/>
+                                        Value="{StaticResource SignoutBtn_MouseOver}"/>
 
                             </Trigger>
 
@@ -215,7 +215,7 @@
 
             </Grid>
 
-            <!--App Close Button-->
+            <!--App Signout Button-->
 
             <Grid>
 
@@ -231,17 +231,17 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="CloseBtn"
+                <Button x:Name="SignoutBtn"
                         Grid.Column="1"
                         Grid.Row="1"
                         Height="40"
                         Width="40"
                         BorderThickness="0"
-                        Style="{StaticResource Close_btn}" Click="CloseBtn_Click">
+                        Style="{StaticResource Signout_btn}" Click="SignoutBtn_Click">
 
                     <Button.Background>
 
-                        <ImageBrush ImageSource="Pictures/icons8-macos-close-30.png"/>
+                        <ImageBrush ImageSource="Pictures/icons8-exit-32.png"/>
 
                     </Button.Background>
 
@@ -267,7 +267,7 @@
                 <Button x:Name="RefreshBtn"
                         Grid.Row="1"
                         Height="34"
-                        Width="34"
+                        Width="31"
                         BorderThickness="0"
                         Style="{StaticResource Refresh_btn}" Click="RefreshBtn_Click" Margin="884,10,10,10">
 
