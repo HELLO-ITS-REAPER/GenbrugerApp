@@ -26,22 +26,22 @@ namespace GenbrugerApp
     /// <summary>
     /// Interaction logic for StatisticsPage1.xaml
     /// </summary>
-    public partial class StatisticsPage1 : Page
+    public partial class StatisticsPage1 : Page // Frederik (Hele Statestik)
     {
         /// Frederik har lavet hele StaticsPage1
         private string kategoriValgt;
         static int KategoriInt;
-        static string tid0="";
-        static string tid1="";
-        static string tid2="";
-        static string tid3="";
-        static string tid4="";
-        static string tid5="";
-        static string tid6="";
-        static string tid7="";
-        static string tid8="";
-        static string tid9="";
-        static string tid10="";
+        static string tid0 = "";
+        static string tid1 = "";
+        static string tid2 = "";
+        static string tid3 = "";
+        static string tid4 = "";
+        static string tid5 = "";
+        static string tid6 = "";
+        static string tid7 = "";
+        static string tid8 = "";
+        static string tid9 = "";
+        static string tid10 = "";
 
         public string KategoriValgt
         {
@@ -131,11 +131,11 @@ namespace GenbrugerApp
 
                     if (allTime.Count <= 11)
                     {
-                        for (int i = 0; i < allTime.Count ; i++)
+                        for (int i = 0; i < allTime.Count; i++)
                         {
                             focusedTime.Add(allTime[i]);
                             focusedValues.Add(allValues[i]);
-                            
+
                         }
                         focusedTime.Reverse();
                         focusedValues.Reverse();
@@ -192,15 +192,15 @@ namespace GenbrugerApp
                 SeriesCollection = new SeriesCollection
             {
                 new LineSeries
-                {                    
+                {
                     Title = "",
 
                     Values = new ChartValues<double>(focusedValues)
                 }
             };
-                
 
-                Labels = new[] { tid0, tid1,tid2,tid3,tid4, tid5 , tid6 , tid7 , tid8 , tid9, tid10 };
+
+                Labels = new[] { tid0, tid1, tid2, tid3, tid4, tid5, tid6, tid7, tid8, tid9, tid10 };
                 YFormatter = value => value.ToString("C");
 
                 DataContext = this;
@@ -211,15 +211,5 @@ namespace GenbrugerApp
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
-
     }
 }
-
-
-
-
-
-
-
-    
-

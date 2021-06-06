@@ -23,7 +23,7 @@ namespace GenbrugerApp
     public partial class AddWindow : Window
     {
         public Repository repository = new Repository();
-        public AddWindow()
+        public AddWindow() // Martin (Hele AddWindow)
         {
             InitializeComponent();
 
@@ -47,35 +47,35 @@ namespace GenbrugerApp
             MåleenhedComboBox.Items.Add("Hektoliter");
         }
 
-        public void CVR_GotFocus(object sender, RoutedEventArgs e)
+        public void CVR_GotFocus(object sender, RoutedEventArgs e) // Mads
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
             tb.GotFocus -= CVR_GotFocus;
         }
 
-        public void Ansvarlig_GotFocus(object sender, RoutedEventArgs e)
+        public void Ansvarlig_GotFocus(object sender, RoutedEventArgs e) // Mads
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
             tb.GotFocus -= Ansvarlig_GotFocus;
         }
 
-        public void Beskrivelse_GotFocus(object sender, RoutedEventArgs e)
+        public void Beskrivelse_GotFocus(object sender, RoutedEventArgs e) // Mads
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
             tb.GotFocus -= Beskrivelse_GotFocus;
         }
 
-        public void Mængde_GotFocus(object sender, RoutedEventArgs e)
+        public void Mængde_GotFocus(object sender, RoutedEventArgs e) // Mads
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
             tb.GotFocus -= Mængde_GotFocus;
         }
 
-        private void LUK_Click(object sender, RoutedEventArgs e)
+        private void LUK_Click(object sender, RoutedEventArgs e) // Mads
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
@@ -94,7 +94,6 @@ namespace GenbrugerApp
         public int MåleenhedInt;
         public bool KategoriCheck = false;
         public bool MåleenhedCheck = false;
-        char currentCharacter;
         public bool CvrRequirements = false;
         public bool AnsvarligRequirements = false;
         public bool BeskrivelseRequirements = false;
@@ -104,51 +103,22 @@ namespace GenbrugerApp
         {
             if (CvrTxt.Text.Length == 8)
             {
-                for (int i = 0; i < CvrTxt.Text.Length; i++)
-                {
-                    currentCharacter = CvrTxt.Text[i];
-
-                    if (char.IsNumber(currentCharacter))
-                    {
-                        CvrRequirements = true;
-                    }
-                }
+                CvrRequirements = true;
             }
 
             if (AnsvarligTxt.Text.Length > 0)
             {
-                for (int i = 0; i < AnsvarligTxt.Text.Length; i++)
-                {
-                    currentCharacter = AnsvarligTxt.Text[i];
-                    if (char.IsLetter(currentCharacter))
-                    {
-                        AnsvarligRequirements = true;
-                    }
-                }
+                AnsvarligRequirements = true;
             }
 
             if (BeskrivelseTxt.Text.Length > 0)
             {
-                for (int i = 0; i < BeskrivelseTxt.Text.Length; i++)
-                {
-                    currentCharacter = BeskrivelseTxt.Text[i];
-                    if (char.IsLetter(currentCharacter))
-                    {
-                        BeskrivelseRequirements = true;
-                    }
-                }
+                BeskrivelseRequirements = true;
             }
 
             if (MængdeTxt.Text.Length > 0)
             {
-                for (int i = 0; i < MængdeTxt.Text.Length; i++)
-                {
-                    currentCharacter = MængdeTxt.Text[i];
-                    if (char.IsDigit(currentCharacter))
-                    {
-                        MængdeRequirements = true;
-                    }
-                }
+                MængdeRequirements = true;
             }
 
             switch (KategoriComboBox.SelectedItem)
@@ -258,8 +228,6 @@ namespace GenbrugerApp
             {
                 MessageBox.Show(ex.Message);
             }
-
-
             CvrTxt.Clear();
             CvrTxt.Text = "CVR";
             AnsvarligTxt.Clear();
@@ -270,8 +238,6 @@ namespace GenbrugerApp
             MængdeTxt.Text = "Mængde";
             MåleenhedComboBox.Text = "Måleenhed";
             KategoriComboBox.Text = "Vælg en kategori";
-
-
         }
     }
 }

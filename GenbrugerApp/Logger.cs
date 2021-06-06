@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GenbrugerApp
 {
-    public class Logger
+    public class Logger // Martin (Hele Logger)
     {
         private static string path = Directory.GetCurrentDirectory();
         public static void SaveMessage(string message)

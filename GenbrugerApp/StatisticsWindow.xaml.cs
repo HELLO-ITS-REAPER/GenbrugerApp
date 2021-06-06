@@ -27,7 +27,7 @@ namespace GenbrugerApp
     /// <summary>
     /// Interaction logic for StatisticsWindow.xaml
     /// </summary>
-    public partial class StatisticsWindow : Window
+    public partial class StatisticsWindow : Window // Frederik (Hele Statestik)
     {
         static bool filter = true;
 
@@ -168,10 +168,8 @@ namespace GenbrugerApp
 
         }
 
-        private void UploadButton_Click(object sender, RoutedEventArgs e)
+        private void UploadButton_Click(object sender, RoutedEventArgs e) // Martin
         {
-            // Martin
-
             if (filter != false)
             {
                 SqlConnection connection = null;
@@ -213,5 +211,3 @@ namespace GenbrugerApp
         }
     }
 }
-
-

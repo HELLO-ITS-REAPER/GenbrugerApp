@@ -26,20 +26,20 @@ namespace GenbrugerApp
     /// <summary>
     /// Interaction logic for StatisticsPage.xaml
     /// </summary>
-    public partial class StatisticsPage : Page
+    public partial class StatisticsPage : Page // Frederik ( Hele Statestik)
     {
         public StatisticsPage()
         {///Frederik hele statisticsPage
             InitializeComponent();
             StatsPageGraf();
         }
-       
+
         private async void StatsPageGraf()
         {
             await System.Threading.Tasks.Task.Delay(100);
-           
-            
-            
+
+
+
             List<double> allValues = new List<double>();
             List<double> allSum = new List<double>();
             for (int KategoriInt = 1; KategoriInt < 10; KategoriInt++)
@@ -93,7 +93,7 @@ namespace GenbrugerApp
                 Values = new ChartValues<double>(impSum)
             });
 
-           
+
 
             Labels = new[] { "Batterier", "Biler", "Elektronikaffald", "Imprægneret træ", "Inventar", "Organisk affald", "Pap og papir", "Plastemballager", "PVC", };
             Formatter = value => value.ToString("N");
@@ -116,4 +116,3 @@ namespace GenbrugerApp
     }
 }
 
-           

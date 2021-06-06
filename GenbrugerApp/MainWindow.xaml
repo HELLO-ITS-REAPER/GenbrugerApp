@@ -8,7 +8,7 @@
         Title="MainWindow" Height="513" Width="1030"
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize">
- <!--Mads-->
+    <!--Mads-->
     <Window.Resources>
 
         <!--Toggle Button Style-->
@@ -409,7 +409,7 @@
                         <ListViewItem HorizontalAlignment="Left"
                               Margin="0,0,0,15">
                             <Button Click="AddButton_Click" Background="Transparent" BorderThickness="0" Height="48">
-                            <StackPanel Orientation="Horizontal"
+                                <StackPanel Orientation="Horizontal"
                                 Width="230">
                                     <Image Source="Pictures/icons8-add-property-26.png"
                                Stretch="None"

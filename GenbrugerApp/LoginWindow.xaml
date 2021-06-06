@@ -8,6 +8,7 @@
         Title="LoginWindow" Height="265" Width="250"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
+        <!--Martin-->
         <TextBox Name="BrugernavnTxt" Height="35" Width="200"
                  VerticalContentAlignment="Top" HorizontalAlignment="Center"
                  Margin="0,0,0,120" Text="Brugernavn" FontSize="24" GotFocus="BrugernavnTxt_GotFocus"/>

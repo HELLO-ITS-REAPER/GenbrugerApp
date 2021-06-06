@@ -93,8 +93,8 @@ namespace GenbrugerApp
                 {
                     using (StreamWriter sw = File.AppendText(csvPath))
                     {
-                        sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + 
-                            skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + 
+                        sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" +
+                            skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" +
                             Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
                     }
                 }
@@ -107,16 +107,15 @@ namespace GenbrugerApp
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e) // Martin
         {
-            ///Martin
             AddWindow addWindow = new AddWindow();
             addWindow.Show();
             this.Close();
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {//Martin
+        private void EditButton_Click(object sender, RoutedEventArgs e) //Martin
+        {
             try
             {
                 DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
@@ -133,8 +132,8 @@ namespace GenbrugerApp
             }
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {//Mads
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) //Mads
+        {
             try
             {
                 DataGridRow row = Data.ItemContainerGenerator.ContainerFromIndex(Data.SelectedIndex) as DataGridRow;
@@ -169,16 +168,16 @@ namespace GenbrugerApp
             }
         }
 
-        private void StatisticsButton_Click(object sender, RoutedEventArgs e)
-        {// Martin
+        private void StatisticsButton_Click(object sender, RoutedEventArgs e) // Martin
+        {
 
             StatisticsWindow statisticsWindow = new StatisticsWindow();
             statisticsWindow.Show();
             this.Close();
         }
 
-        private void SqlViewer()
-        {// Martin
+        private void SqlViewer() // Martin
+        {
             SqlConnection connection = null;
             try
             {
@@ -211,8 +210,8 @@ namespace GenbrugerApp
             }
         }
 
-        private void ListViewItem_Toggle(object sender, MouseEventArgs e)
-        {// Mads
+        private void ListViewItem_Toggle(object sender, MouseEventArgs e) // Mads
+        {
             if (Tg_Btn.IsChecked == true)
             {
                 tt_tilføj.Visibility = Visibility.Collapsed;
@@ -234,33 +233,33 @@ namespace GenbrugerApp
             }
         }
 
-        private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e)
+        private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e) // Mads
         {//Mads
             img_bg.Opacity = 1;
             Logo.Opacity = 1;
             Data.Opacity = 1;
         }
 
-        private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
+        private void Tg_Btn_Checked(object sender, RoutedEventArgs e) // Mads
         {// Mads
             img_bg.Opacity = 0.9;
             Logo.Opacity = 0.2;
             Data.Opacity = 0.2;
         }
 
-        private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) // Mads
         {// Mads
             Tg_Btn.IsChecked = false;
         }
 
-        private void SignoutBtn_Click(object sender, RoutedEventArgs e)
+        private void SignoutBtn_Click(object sender, RoutedEventArgs e) // Mads
         { // Martin
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
         }
 
-        private void RefreshBtn_Click(object sender, RoutedEventArgs e)
+        private void RefreshBtn_Click(object sender, RoutedEventArgs e) // Mads
         { // Mads
             Data.ItemsSource = null;
             SqlViewer();

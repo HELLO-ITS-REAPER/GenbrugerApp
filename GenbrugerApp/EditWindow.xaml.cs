@@ -22,7 +22,7 @@ namespace GenbrugerApp
     /// </summary>
     public partial class EditWindow : Window
     {
-        /// Martin
+        /// Martin (Hele Edit)
         public Repository repository = new Repository();
         public SkraldData skraldData;
         public string Mængde { get; set; }
@@ -87,63 +87,27 @@ namespace GenbrugerApp
         {
             if (CvrTxt.Text.Length == 8)
             {
-                for (int i = 0; i < CvrTxt.Text.Length; i++)
-                {
-                    currentCharacter = CvrTxt.Text[i];
-
-                    if (char.IsNumber(currentCharacter))
-                    {
-                        CvrRequirements = true;
-                    }
-                }
+                CvrRequirements = true;
             }
 
             if (AnsvarligTxt.Text.Length > 0)
             {
-                for (int i = 0; i < AnsvarligTxt.Text.Length; i++)
-                {
-                    currentCharacter = AnsvarligTxt.Text[i];
-                    if (char.IsLetter(currentCharacter))
-                    {
-                        AnsvarligRequirements = true;
-                    }
-                }
+                AnsvarligRequirements = true;
             }
 
             if (BeskrivelseTxt.Text.Length > 0)
             {
-                for (int i = 0; i < BeskrivelseTxt.Text.Length; i++)
-                {
-                    currentCharacter = BeskrivelseTxt.Text[i];
-                    if (char.IsLetter(currentCharacter))
-                    {
-                        BeskrivelseRequirements = true;
-                    }
-                }
+                BeskrivelseRequirements = true;
             }
 
             if (MængdeTxt.Text.Length > 0)
             {
-                for (int i = 0; i < MængdeTxt.Text.Length; i++)
-                {
-                    currentCharacter = MængdeTxt.Text[i];
-                    if (char.IsDigit(currentCharacter))
-                    {
-                        MængdeRequirements = true;
-                    }
-                }
+                MængdeRequirements = true;
             }
 
             if (TidTxt.Text.Length > 0)
             {
-                for (int i = 0; i < TidTxt.Text.Length; i++)
-                {
-                    currentCharacter = TidTxt.Text[i];
-                    if (char.IsDigit(currentCharacter))
-                    {
-                        TidRequirements = true;
-                    }
-                }
+                TidRequirements = true;
             }
 
             switch (KategoriComboBox.SelectedItem)
@@ -228,11 +192,11 @@ namespace GenbrugerApp
 
             try
             {
-                if (KategoriCheck && MåleenhedCheck && CvrRequirements && 
+                if (KategoriCheck && MåleenhedCheck && CvrRequirements &&
                     AnsvarligRequirements && BeskrivelseRequirements && MængdeRequirements && TidRequirements)
                 {
                     repository.Edit(MængdeTxt.Text, MåleenhedInt, KategoriInt, BeskrivelseTxt.Text, AnsvarligTxt.Text
-                        ,CvrTxt.Text, TidTxt.Text, skraldData.SkraldeID.ToString());
+                        , CvrTxt.Text, TidTxt.Text, skraldData.SkraldeID.ToString());
                     MessageBox.Show("Dine ændringer er nu opdateret.");
                     Logger.SaveMessage("Brugeren har redigeret en data i databasen\n" +
                     "Den tidligere data:" +
@@ -264,7 +228,7 @@ namespace GenbrugerApp
             }
         }
 
-        private void LUK_Click(object sender, RoutedEventArgs e)
+        private void LUK_Click(object sender, RoutedEventArgs e) // Mads
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

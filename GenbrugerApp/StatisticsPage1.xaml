@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StatisticsPage1">
-<!--Frederik-->
+    <!--Frederik-->
     <Grid Height="250" Width="500" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,60,0,0">
         <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" >
             <lvc:CartesianChart.AxisY>

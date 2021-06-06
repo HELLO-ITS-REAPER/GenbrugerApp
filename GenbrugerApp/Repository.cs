@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GenbrugerApp
 {
-    public class Repository
+    public class Repository // Martin (Add, Edit)
     {
         public SqlConnection connection;
         public Repository()
@@ -17,7 +17,7 @@ namespace GenbrugerApp
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringDelta"].ConnectionString);
         }
 
-        public void Add(string Mængde, int Måleenhed, int Kategori, string Beskrivelse, string Ansvarlig, string CVR)
+        public void Add(string Mængde, int Måleenhed, int Kategori, string Beskrivelse, string Ansvarlig, string CVR) // Martin
         {
             try
             {
@@ -40,7 +40,7 @@ namespace GenbrugerApp
             }
         }
 
-        public void Edit(string Mængde, int Måleenhed, int Kategori, string Beskrivelse, string Ansvarlig, string CVR, string Tid, string SkraldeID)
+        public void Edit(string Mængde, int Måleenhed, int Kategori, string Beskrivelse, string Ansvarlig, string CVR, string Tid, string SkraldeID) // Martin
         {
             try
             {
@@ -62,7 +62,7 @@ namespace GenbrugerApp
             }
         }
 
-        public void Delete(string SkraldeID)
+        public void Delete(string SkraldeID) // Mads
         {
             try
             {
