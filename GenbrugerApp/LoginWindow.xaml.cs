@@ -17,7 +17,7 @@ namespace GenbrugerApp
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginWindow : Window // Martin har lavet hele Login
     {
         private string brugernavn = "Delta";
         private string kodeord = "1234";
