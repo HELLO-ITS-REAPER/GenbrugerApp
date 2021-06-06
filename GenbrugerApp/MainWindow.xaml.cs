@@ -49,7 +49,7 @@ namespace GenbrugerApp
                     var importList = new List<SkraldData>();
                     foreach (var line in lines)
                     {
-                        var values = line.Split(';');
+                        var values = line.Split(',');
                         var data = new SkraldData()
                         {
                             SkraldeID = values[0],
@@ -95,7 +95,7 @@ namespace GenbrugerApp
                 {
                     using (StreamWriter sw = File.AppendText(csvPath))
                     {
-                        sw.WriteLine(skraldData[i].SkraldeID + ";" + skraldData[i].Mængde.Replace(',', '.') + ";" + skraldData[i].Måleenhed + ";" + skraldData[i].Kategori + ";" + skraldData[i].Beskrivelse + ";" + skraldData[i].Ansvarlig + ";" + skraldData[i].CVR + ";" + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
+                        sw.WriteLine(skraldData[i].SkraldeID + "," + skraldData[i].Mængde.Replace(',', '.') + "," + skraldData[i].Måleenhed + "," + skraldData[i].Kategori + "," + skraldData[i].Beskrivelse + "," + skraldData[i].Ansvarlig + "," + skraldData[i].CVR + "," + Convert.ToString(skraldData[i].Tid).Replace('.', ':'));
                     }
                 }
                 MessageBox.Show("CSV filen er gemt " + csvPath);

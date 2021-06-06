@@ -258,7 +258,7 @@ namespace GenbrugerApp
                     MessageBox.Show("Du skal udfylde alle felterne.");
                 }
             }
-            catch 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
