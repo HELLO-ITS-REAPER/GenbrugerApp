@@ -253,9 +253,11 @@ namespace GenbrugerApp
             Tg_Btn.IsChecked = false;
         }
 
-        private void CloseBtn_Click(object sender, RoutedEventArgs e)
-        { // Mads
-            Close();
+        private void SignoutBtn_Click(object sender, RoutedEventArgs e)
+        { // Martin
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
 
         private void RefreshBtn_Click(object sender, RoutedEventArgs e)
