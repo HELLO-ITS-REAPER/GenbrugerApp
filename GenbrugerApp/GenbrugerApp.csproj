@@ -277,7 +277,9 @@
   <ItemGroup>
     <Resource Include="Pictures\icons8-exit-32.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Class_Diagram_1.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="High Fidelity\Skærmbillede 2021-06-07 112342.png" />
     <Resource Include="High Fidelity\Skærmbillede 2021-06-07 112354.png" />
